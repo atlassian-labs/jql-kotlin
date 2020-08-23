@@ -6,3 +6,6 @@ continuation_indent_size = 4
 kotlin_imports_layout=idea
 insert_final_newline=true
 disabled_rules=filename
+
+[src/test/**/jql/field/*.{kt, kts}]
+disabled_rules=indent

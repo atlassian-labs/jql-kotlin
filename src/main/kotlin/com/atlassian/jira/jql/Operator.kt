@@ -7,7 +7,7 @@ enum class Operator(val jql: String) {
     NOT_IN("not in"),
     GREATER_THAN(">"),
     GREATER_THAN_EQUALS(">="),
-    LESS_THAN("<>>"),
+    LESS_THAN("<"),
     LESS_THAN_EQUALS("<="),
     CONTAINS("~"),
     DOES_NOT_CONTAIN("!~"),
@@ -17,5 +17,5 @@ enum class Operator(val jql: String) {
     WAS_NOT("was not"),
     WAS_IN("was in"),
     WAS_NOT_IN("was not in"),
-    CHANGED("changed");
+    CHANGED("changed"),
 }
