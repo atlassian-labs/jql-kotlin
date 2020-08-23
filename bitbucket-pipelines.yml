@@ -1,0 +1,21 @@
+image: maven:3.6.3
+
+definitions:
+  # Used for accessing packages.atlassian.com
+  # https://hello.atlassian.net/wiki/spaces/RELENG/pages/515270561
+  artifactory-access:
+    - &artifactory-prepare
+      pipe: docker://atlassian/artifactory-sidekick:latest
+    - &artifactory-enable
+        source .artifactory/activate.sh
+
+pipelines:
+  default:
+    - step:
+        name: Build and test
+        caches:
+          - maven
+        script:
+          - *artifactory-prepare
+          - *artifactory-enable
+          - mvn verify

@@ -4,7 +4,7 @@ import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.escape
 
 abstract class AbstractIssueLinkField(type: IssueLinkType.Name? = null) : Field(
-    "issueLink" + type?.let { "[${it.jql}]" }.orEmpty()
+    type?.let { "issue${it.jql}" } ?: "issueLink"
 ) {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
     infix fun equalTo(value: Number): Clause = equalTo { value.toString() }
@@ -28,16 +28,16 @@ object IssueLinkType : Field("issueLinkType") {
 
     class Name(val jql: String)
 
-    val isBlockedBy = Name("\"is blocked by\"")
-    val blocks = Name("blocks")
-    val isClonedBy = Name("\"is cloned by\"")
-    val clones = Name("clones")
-    val isDuplicatedBy = Name("\"is duplicated by\"")
-    val duplicates = Name("duplicates")
-    val splitFrom = Name("\"split from\"")
-    val splitTo = Name("\"split to\"")
-    val isCausedBy = Name("\"is caused by\"")
-    val causes = Name("causes")
+    val isBlockedBy = Name("IsBlockedBy")
+    val blocks = Name("Blocks")
+    val isClonedBy = Name("IsClonedBy")
+    val clones = Name("Clones")
+    val isDuplicatedBy = Name("IsDuplicatedBy")
+    val duplicates = Name("Duplicates")
+    val splitFrom = Name("SplitFrom")
+    val splitTo = Name("SplitTo")
+    val isCausedBy = Name("IsCausedBy")
+    val causes = Name("Causes")
 
     fun custom(jql: String) = Name(jql)
 }

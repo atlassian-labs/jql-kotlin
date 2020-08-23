@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class CommentTest {
     @Test
     fun `comment contains value`() = assertJql(
-        Comment contains " \"My PC is quite\told\t",
+        Comment contains "\"My PC is quite old",
         // language=JQL
         expectedJql = """comment ~ "\"My PC is quite old""""
     )
