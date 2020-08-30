@@ -128,6 +128,8 @@ object Priority : Field("priority"), SortableField {
     infix fun lessThan(value: Number): Clause = lessThan { value.toString() }
     infix fun lessThanOrEqualTo(value: String): Clause = lessThanOrEqualTo { value.escape() }
     infix fun lessThanOrEqualTo(value: Number): Clause = lessThanOrEqualTo { value.toString() }
+    infix fun iz(value: IsIsNotValue): Clause = iz { value }
+    infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
 
 object Project : Field("project"), SortableField {

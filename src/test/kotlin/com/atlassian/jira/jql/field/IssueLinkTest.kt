@@ -114,7 +114,7 @@ class IssueLinkTest {
 
     @Test
     fun `custom issue link`() = assertJql(
-        IssueLink.ofType(IssueLinkType.custom("IsTestFor")) equalTo "ABC-123",
+        IssueLink.ofType(IssueLinkType.custom("\"is test for\"")) equalTo "ABC-123",
         // language=JQL
         expectedJql = """issueIsTestFor = "ABC-123""""
     )
