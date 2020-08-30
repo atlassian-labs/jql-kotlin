@@ -1,6 +1,7 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.Clause
+import com.atlassian.jira.jql.RelativeDateTime
 import com.atlassian.jira.jql.escape
 import java.time.Duration
 import java.time.LocalDateTime
@@ -50,7 +51,7 @@ object Jsd {
         val api = Name("api")
     }
 
-    object RequestLastActivityTime : AbstractDateField<LocalDateTime>("request-last-activity-time")
+    object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")
 
     abstract class AbstractSlaField(name: String) : Field(name) {
         infix fun equalTo(value: Duration): Clause = equalTo { value.toJql() }
