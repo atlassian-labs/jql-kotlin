@@ -146,10 +146,17 @@ object Project : Field("project"), SortableField {
 }
 
 object ProjectType : Field("projectType") {
-    infix fun equalTo(value: String): Clause = equalTo { value.escape() }
-    infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
-    infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
+    infix fun equalTo(value: Value): Clause = equalTo { value.jql }
+    infix fun notEqualTo(value: Value): Clause = notEqualTo { value.jql }
+    infix fun anyOf(values: Collection<Value>): Clause = anyOf { values.map { it.jql } }
+    infix fun noneOf(values: Collection<Value>): Clause = noneOf { values.map { it.jql } }
+
+    sealed class Value(val jql: String) {
+        object JiraCore : Value("business")
+        object JiraSoftware : Value("software")
+        object JiraServiceDesk : Value("service_desk")
+        object JiraOps : Value("ops")
+    }
 }
 
 object Resolution : Field("resolution"), SortableField {

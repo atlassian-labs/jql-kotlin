@@ -34,20 +34,20 @@ object Jsd {
     }
 
     object RequestChannelType : Field("request-channel-type") {
-        infix fun equalTo(value: Name): Clause = equalTo { value.jql }
-        infix fun notEqualTo(value: Name): Clause = notEqualTo { value.jql }
-        infix fun anyOf(values: Collection<Name>): Clause = anyOf { values.map { it.jql } }
-        infix fun noneOf(values: Collection<Name>): Clause = noneOf { values.map { it.jql } }
+        infix fun equalTo(value: Value): Clause = equalTo { value.jql }
+        infix fun notEqualTo(value: Value): Clause = notEqualTo { value.jql }
+        infix fun anyOf(values: Collection<Value>): Clause = anyOf { values.map { it.jql } }
+        infix fun noneOf(values: Collection<Value>): Clause = noneOf { values.map { it.jql } }
         infix fun iz(value: IsIsNotValue): Clause = iz { value }
         infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 
-        class Name(val jql: String)
+        class Value(val jql: String)
 
-        val email = Name("email")
-        val jira = Name("jira")
-        val portal = Name("portal")
-        val anonymousPortal = Name("\"anonymous portal\"")
-        val api = Name("api")
+        val email = Value("email")
+        val jira = Value("jira")
+        val portal = Value("portal")
+        val anonymousPortal = Value("\"anonymous portal\"")
+        val api = Value("api")
     }
 
     object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")

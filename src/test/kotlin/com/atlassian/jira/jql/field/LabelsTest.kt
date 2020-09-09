@@ -5,28 +5,28 @@ import org.junit.jupiter.api.Test
 
 internal class LabelsTest {
     @Test
-    fun `labels equals to string`() = assertJql(
+    fun `labels equals to value`() = assertJql(
         Labels equalTo "label1",
         // language=JQL
         expectedJql = """labels = "label1""""
     )
 
     @Test
-    fun `labels not equals to string`() = assertJql(
+    fun `labels not equals to value`() = assertJql(
         Labels notEqualTo "label2",
         // language=JQL
         expectedJql = """labels != "label2""""
     )
 
     @Test
-    fun `labels in strings`() = assertJql(
+    fun `labels in values`() = assertJql(
         Labels anyOf listOf("foo", "bar", "baz"),
         // language=JQL
         expectedJql = """labels in ("foo","bar","baz")"""
     )
 
     @Test
-    fun `labels not in strings`() = assertJql(
+    fun `labels not in values`() = assertJql(
         Labels noneOf listOf("abra", "cadabra"),
         // language=JQL
         expectedJql = """labels not in ("abra","cadabra")"""

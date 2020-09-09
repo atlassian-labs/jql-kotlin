@@ -4,7 +4,7 @@ import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.escape
 import java.util.Locale
 
-abstract class AbstractIssueLinkField(type: IssueLinkType.Name? = null) : Field(
+abstract class AbstractIssueLinkField(type: IssueLinkType.Value? = null) : Field(
     type?.let { "issue${it.issueLinkSuffix}" } ?: "issueLink"
 ) {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
@@ -18,34 +18,34 @@ abstract class AbstractIssueLinkField(type: IssueLinkType.Name? = null) : Field(
 }
 
 object IssueLink : AbstractIssueLinkField() {
-    fun ofType(type: IssueLinkType.Name) = object : AbstractIssueLinkField(type) {}
+    fun ofType(type: IssueLinkType.Value) = object : AbstractIssueLinkField(type) {}
 }
 
 object IssueLinkType : Field("issueLinkType") {
-    infix fun equalTo(value: Name): Clause = equalTo { value.value }
-    infix fun notEqualTo(value: Name): Clause = notEqualTo { value.value }
-    infix fun anyOf(values: Collection<Name>): Clause = anyOf { values.map { it.value } }
-    infix fun noneOf(values: Collection<Name>): Clause = noneOf { values.map { it.value } }
+    infix fun equalTo(value: Value): Clause = equalTo { value.jql }
+    infix fun notEqualTo(value: Value): Clause = notEqualTo { value.jql }
+    infix fun anyOf(values: Collection<Value>): Clause = anyOf { values.map { it.jql } }
+    infix fun noneOf(values: Collection<Value>): Clause = noneOf { values.map { it.jql } }
 
-    class Name(val value: String) {
+    class Value(val jql: String) {
         val issueLinkSuffix: String
-            get() = value
+            get() = jql
                 .removePrefix("\"")
                 .removeSuffix("\"")
                 .split(' ')
                 .joinToString(separator = "") { it.capitalize(Locale.ENGLISH) }
     }
 
-    val isBlockedBy = Name("\"is blocked by\"")
-    val blocks = Name("blocks")
-    val isClonedBy = Name("\"is cloned by\"")
-    val clones = Name("clones")
-    val isDuplicatedBy = Name("\"is duplicated by\"")
-    val duplicates = Name("duplicates")
-    val splitFrom = Name("\"split from\"")
-    val splitTo = Name("\"split to\"")
-    val isCausedBy = Name("\"is caused by\"")
-    val causes = Name("causes")
+    val isBlockedBy = Value("\"is blocked by\"")
+    val blocks = Value("blocks")
+    val isClonedBy = Value("\"is cloned by\"")
+    val clones = Value("clones")
+    val isDuplicatedBy = Value("\"is duplicated by\"")
+    val duplicates = Value("duplicates")
+    val splitFrom = Value("\"split from\"")
+    val splitTo = Value("\"split to\"")
+    val isCausedBy = Value("\"is caused by\"")
+    val causes = Value("causes")
 
-    fun custom(jql: String) = Name(jql)
+    fun custom(jql: String) = Value(jql)
 }
