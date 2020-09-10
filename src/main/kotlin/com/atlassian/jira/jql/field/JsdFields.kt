@@ -2,6 +2,7 @@ package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.RelativeDateTime
+import com.atlassian.jira.jql.RelativeTime
 import com.atlassian.jira.jql.escape
 import java.time.LocalDateTime
 
@@ -52,11 +53,16 @@ object Jsd {
 
     object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")
 
-    abstract class AbstractSlaField(name: String) : Field(name) {
-        val todo: Nothing = TODO("Only functions here")
+    abstract class AbstractSlaField(name: String) : Field(name), SortableField {
+        infix fun equalTo(value: RelativeTime): Clause = equalTo { value.jql }
+        infix fun notEqualTo(value: RelativeTime): Clause = notEqualTo { value.jql }
+        infix fun greaterThan(value: RelativeTime): Clause = greaterThan { value.jql }
+        infix fun greaterThanOrEqualTo(value: RelativeTime): Clause = greaterThanOrEqualTo { value.jql }
+        infix fun lessThan(value: RelativeTime): Clause = lessThan { value.jql }
+        infix fun lessThanOrEqualTo(value: RelativeTime): Clause = lessThanOrEqualTo { value.jql }
     }
 
-    object SLA {
+    object Sla {
         object TimeToResolution : AbstractSlaField("\"Time to resolution\"")
 
         object TimeToFirstResponse : AbstractSlaField("\"Time to first response\"")

@@ -21,13 +21,13 @@ abstract class AbstractDateField<T : Temporal, R : RelativeTemporal>(
 ) : Field(name), SortableField {
     infix fun greaterThan(value: T): Clause = greaterThan { formatTemporal(value).escape() }
     // TODO test for this and other R typed methods
-    infix fun greaterThan(value: R): Clause = greaterThan { value.toJql() }
+    infix fun greaterThan(value: R): Clause = greaterThan { value.jql }
     infix fun greaterThanOrEqualTo(value: T): Clause = greaterThanOrEqualTo { formatTemporal(value).escape() }
-    infix fun greaterThanOrEqualTo(value: R): Clause = greaterThanOrEqualTo { value.toJql() }
+    infix fun greaterThanOrEqualTo(value: R): Clause = greaterThanOrEqualTo { value.jql }
     infix fun lessThan(value: T): Clause = lessThan { formatTemporal(value).escape() }
-    infix fun lessThan(value: R): Clause = lessThan { value.toJql() }
+    infix fun lessThan(value: R): Clause = lessThan { value.jql }
     infix fun lessThanOrEqualTo(value: T): Clause = lessThanOrEqualTo { formatTemporal(value).escape() }
-    infix fun lessThanOrEqualTo(value: R): Clause = lessThanOrEqualTo { value.toJql() }
+    infix fun lessThanOrEqualTo(value: R): Clause = lessThanOrEqualTo { value.jql }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
