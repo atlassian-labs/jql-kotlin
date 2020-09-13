@@ -53,6 +53,8 @@ object Jsd {
 
     object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")
 
+    // Intentionally omitted EQUALS, NOT EQUALS as they don't make much sense here
+    // given that they require minute precision values equality.
     abstract class AbstractSlaField(name: String) : Field(name), SortableField {
         infix fun greaterThan(value: RelativeTime): Clause = greaterThan { value.jql }
         infix fun greaterThanOrEqualTo(value: RelativeTime): Clause = greaterThanOrEqualTo { value.jql }

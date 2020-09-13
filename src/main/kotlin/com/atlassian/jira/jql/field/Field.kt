@@ -57,28 +57,3 @@ abstract class Field(override val name: String) : FieldName {
     private fun clause(operator: Operator, operand: IsIsNotValue): Clause =
         Clause("$name ${operator.jql} ${operand.jql}")
 }
-
-//
-// object F : Field("kuku") {
-//    infix fun equalTo(value: String) = equalTo { value }
-//    infix fun iz(value: KeywordValue) = super.iz { value }
-//    infix fun izNot(value: KeywordValue) = super.izNot { value }
-// }
-//
-// fun main() {
-//    val jql = F equalTo "hello" and -{ (F iz Empty) or -(F izNot Null) }
-//    val j = -(F equalTo  "hello")
-// }
-
-// interface Field2 : JqlEntity {
-//    val name: String
-//    fun escapeValue(value: Any) = when (value) {
-//        is String -> value.escape()
-//        is Number -> value.toString()
-//        else -> UnsupportedOperationException("Unsupported value type ${value::class.qualifiedName}")
-//    }
-//
-//    operator fun unaryPlus() = FieldOrder.Ascending(this)
-//    operator fun unaryMinus() = FieldOrder.Descending(this)
-//    override fun toJql() = name
-// }
