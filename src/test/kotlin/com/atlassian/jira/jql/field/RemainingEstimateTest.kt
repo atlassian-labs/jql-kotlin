@@ -45,7 +45,7 @@ internal class RemainingEstimateTest {
     @Test
     fun `remaining estimate greater than equals value`() = assertJql(
         RemainingEstimate greaterThanOrEqualTo 17.minutes,
-        // language=JQ6
+        // language=JQL
         expectedJql = """remainingEstimate >= "17m""""
     )
 

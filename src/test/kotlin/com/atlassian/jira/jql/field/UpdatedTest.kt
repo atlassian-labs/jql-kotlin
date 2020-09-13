@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.time.d
+import com.atlassian.jira.jql.time.h
+import com.atlassian.jira.jql.time.m
+import com.atlassian.jira.jql.time.w
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -13,10 +17,24 @@ class UpdatedTest {
     )
 
     @Test
+    fun `updated greater than relative time`() = assertJql(
+        Updated greaterThan 4.h.ago,
+        // language=JQL
+        expectedJql = """updated > "-4h""""
+    )
+
+    @Test
     fun `updated greater than equals timestamp`() = assertJql(
         Updated greaterThanOrEqualTo LocalDateTime.of(2020, 9, 10, 18, 50),
         // language=JQL
         expectedJql = """updated >= "2020-09-10 18:50""""
+    )
+
+    @Test
+    fun `updated greater than equals relative time`() = assertJql(
+        Updated greaterThanOrEqualTo 2.d.ago,
+        // language=JQL
+        expectedJql = """updated >= "-2d""""
     )
 
     @Test
@@ -27,10 +45,24 @@ class UpdatedTest {
     )
 
     @Test
+    fun `updated less than relative time`() = assertJql(
+        Updated lessThan 10.w.ago,
+        // language=JQL
+        expectedJql = """updated < "-10w""""
+    )
+
+    @Test
     fun `updated less than equals timestamp`() = assertJql(
         Updated lessThanOrEqualTo LocalDateTime.of(2020, 9, 10, 18, 52),
         // language=JQL
         expectedJql = """updated <= "2020-09-10 18:52""""
+    )
+
+    @Test
+    fun `updated less than equals relative time`() = assertJql(
+        Updated lessThanOrEqualTo (4.h + 30.m).ago,
+        // language=JQL
+        expectedJql = """updated <= "-4h 30m""""
     )
 
     @Test

@@ -45,7 +45,7 @@ internal class OriginalEstimateTest {
     @Test
     fun `original estimate greater than equals value`() = assertJql(
         OriginalEstimate greaterThanOrEqualTo 17.minutes,
-        // language=JQ6
+        // language=JQL
         expectedJql = """originalEstimate >= "17m""""
     )
 

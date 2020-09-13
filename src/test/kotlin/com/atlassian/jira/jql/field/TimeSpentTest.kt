@@ -45,7 +45,7 @@ internal class TimeSpentTest {
     @Test
     fun `time spent greater than equals value`() = assertJql(
         TimeSpent greaterThanOrEqualTo 17.minutes,
-        // language=JQ6
+        // language=JQL
         expectedJql = """timeSpent >= "17m""""
     )
 

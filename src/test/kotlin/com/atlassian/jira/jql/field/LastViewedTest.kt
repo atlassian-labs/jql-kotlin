@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.time.d
+import com.atlassian.jira.jql.time.h
+import com.atlassian.jira.jql.time.m
+import com.atlassian.jira.jql.time.w
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -13,10 +17,24 @@ class LastViewedTest {
     )
 
     @Test
+    fun `last viewed greater than relative time`() = assertJql(
+        LastViewed greaterThan (3.h + 15.m).ago,
+        // language=JQL
+        expectedJql = """lastViewed > "-3h 15m""""
+    )
+
+    @Test
     fun `last viewed greater than equals timestamp`() = assertJql(
         LastViewed greaterThanOrEqualTo LocalDateTime.of(2020, 8, 30, 23, 46),
-        // language=JQ6
+        // language=JQL
         expectedJql = """lastViewed >= "2020-08-30 23:46""""
+    )
+
+    @Test
+    fun `last viewed greater than equals relative time`() = assertJql(
+        LastViewed greaterThanOrEqualTo 1.w.ago,
+        // language=JQL
+        expectedJql = """lastViewed >= "-1w""""
     )
 
     @Test
@@ -27,10 +45,24 @@ class LastViewedTest {
     )
 
     @Test
+    fun `last viewed less than relative time`() = assertJql(
+        LastViewed lessThan 1.d.ago,
+        // language=JQL
+        expectedJql = """lastViewed < "-1d""""
+    )
+
+    @Test
     fun `last viewed less than equals timestamp`() = assertJql(
         LastViewed lessThanOrEqualTo LocalDateTime.of(2020, 8, 30, 23, 42),
         // language=JQL
         expectedJql = """lastViewed <= "2020-08-30 23:42""""
+    )
+
+    @Test
+    fun `last viewed less than equals relative time`() = assertJql(
+        LastViewed lessThanOrEqualTo 1.w.ago,
+        // language=JQL
+        expectedJql = """lastViewed <= "-1w""""
     )
 
     @Test

@@ -19,8 +19,6 @@ abstract class AbstractDateField<T : Temporal, R : RelativeDateTime>(
     private val formatTemporal: (T) -> String = dateTimeFormat::format
 ) : Field(name), SortableField {
     infix fun greaterThan(value: T): Clause = greaterThan { formatTemporal(value).escape() }
-
-    // TODO test for this and other R typed methods
     infix fun greaterThan(value: R): Clause = greaterThan { value.jql }
     infix fun greaterThanOrEqualTo(value: T): Clause = greaterThanOrEqualTo { formatTemporal(value).escape() }
     infix fun greaterThanOrEqualTo(value: R): Clause = greaterThanOrEqualTo { value.jql }

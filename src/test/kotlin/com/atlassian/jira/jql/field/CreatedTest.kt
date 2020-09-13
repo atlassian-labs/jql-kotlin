@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.time.d
+import com.atlassian.jira.jql.time.h
+import com.atlassian.jira.jql.time.m
+import com.atlassian.jira.jql.time.w
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -13,10 +17,24 @@ class CreatedTest {
     )
 
     @Test
+    fun `created greater than relative time`() = assertJql(
+        Created greaterThan 3.w.ago,
+        // language=JQL
+        expectedJql = """created > "-3w""""
+    )
+
+    @Test
     fun `created greater than equals timestamp`() = assertJql(
         Created greaterThanOrEqualTo LocalDateTime.of(2020, 8, 24, 1, 37),
         // language=JQL
         expectedJql = """created >= "2020-08-24 01:37""""
+    )
+
+    @Test
+    fun `created greater than equals relative time`() = assertJql(
+        Created greaterThanOrEqualTo (2.d + 5.m).ago,
+        // language=JQL
+        expectedJql = """created >= "-2d 5m""""
     )
 
     @Test
@@ -27,10 +45,24 @@ class CreatedTest {
     )
 
     @Test
+    fun `created less than relative time`() = assertJql(
+        Created lessThan 1.w.ago,
+        // language=JQL
+        expectedJql = """created < "-1w""""
+    )
+
+    @Test
     fun `created less than equals timestamp`() = assertJql(
         Created lessThanOrEqualTo LocalDateTime.of(2020, 8, 24, 1, 39),
         // language=JQL
         expectedJql = """created <= "2020-08-24 01:39""""
+    )
+
+    @Test
+    fun `created less than equals relative time`() = assertJql(
+        Created lessThanOrEqualTo (2.h + 10.m).ago,
+        // language=JQL
+        expectedJql = """created <= "-2h 10m""""
     )
 
     @Test
