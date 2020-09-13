@@ -1,8 +1,6 @@
 package com.atlassian.jira.jql
 
 open class Clause(private val jql: String) : JqlEntity {
-    operator fun unaryMinus(): Clause = NotClause(this)
-
     infix fun and(clause: Clause): Clause =
         CompoundClause(this, Keyword.AND, clause)
 
@@ -30,10 +28,3 @@ open class Clause(private val jql: String) : JqlEntity {
         fun empty() = Clause("")
     }
 }
-
-class NotClause(clause: Clause) : Clause(
-    clause.toJql()
-        .takeIf { it.isNotBlank() }
-        ?.let { "NOT $it" }
-        ?: ""
-)

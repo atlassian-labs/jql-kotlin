@@ -20,5 +20,3 @@ infix fun (() -> Clause).or(clause: Clause): Clause =
 
 infix fun (() -> Clause).or(clause: () -> Clause): Clause =
     CompoundClause(asClause(), Keyword.OR, clause.asClause())
-
-operator fun (() -> Clause).unaryMinus(): Clause = NotClause(asClause())
