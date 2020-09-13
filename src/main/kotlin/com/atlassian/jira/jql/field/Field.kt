@@ -21,8 +21,8 @@ interface FieldName {
 }
 
 interface SortableField : FieldName {
-    operator fun unaryPlus() = FieldOrder.Ascending(name)
-    operator fun unaryMinus() = FieldOrder.Descending(name)
+    val asc get() = FieldOrder.Ascending(name)
+    val desc get() = FieldOrder.Descending(name)
 }
 
 abstract class Field(override val name: String) : FieldName {

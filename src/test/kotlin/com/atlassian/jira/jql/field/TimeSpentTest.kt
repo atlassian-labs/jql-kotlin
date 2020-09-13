@@ -1,62 +1,64 @@
 package com.atlassian.jira.jql.field
 
-import com.atlassian.jira.jql.RelativeDateTime
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.time.hours
+import com.atlassian.jira.jql.time.minutes
+import com.atlassian.jira.jql.time.weeks
 import org.junit.jupiter.api.Test
 
 internal class TimeSpentTest {
     @Test
     fun `time spent equals to value`() = assertJql(
-        TimeSpent equalTo RelativeDateTime(hours = 1),
+        TimeSpent equalTo 1.hours,
         // language=JQL
         expectedJql = """timeSpent = "1h""""
     )
 
     @Test
     fun `time spent not equals to value`() = assertJql(
-        TimeSpent notEqualTo RelativeDateTime(minutes = 10),
+        TimeSpent notEqualTo 10.minutes,
         // language=JQL
         expectedJql = """timeSpent != "10m""""
     )
 
     @Test
     fun `time spent in values`() = assertJql(
-        TimeSpent anyOf listOf(RelativeDateTime(weeks = 1), RelativeDateTime(weeks = 2)),
+        TimeSpent anyOf listOf(1.weeks, 2.weeks),
         // language=JQL
         expectedJql = """timeSpent in ("1w","2w")"""
     )
 
     @Test
     fun `time spent not in values`() = assertJql(
-        TimeSpent noneOf listOf(RelativeDateTime(minutes = 1), RelativeDateTime(minutes = 5)),
+        TimeSpent noneOf listOf(1.minutes, 5.minutes),
         // language=JQL
         expectedJql = """timeSpent not in ("1m","5m")"""
     )
 
     @Test
     fun `time spent greater than value`() = assertJql(
-        TimeSpent greaterThan RelativeDateTime(hours = 2),
+        TimeSpent greaterThan 2.hours,
         // language=JQL
         expectedJql = """timeSpent > "2h""""
     )
 
     @Test
     fun `time spent greater than equals value`() = assertJql(
-        TimeSpent greaterThanOrEqualTo RelativeDateTime(minutes = 17),
+        TimeSpent greaterThanOrEqualTo 17.minutes,
         // language=JQ6
         expectedJql = """timeSpent >= "17m""""
     )
 
     @Test
     fun `time spent less than value`() = assertJql(
-        TimeSpent lessThan RelativeDateTime(weeks = 1),
+        TimeSpent lessThan 1.weeks,
         // language=JQL
         expectedJql = """timeSpent < "1w""""
     )
 
     @Test
     fun `time spent less than equals value`() = assertJql(
-        TimeSpent lessThanOrEqualTo RelativeDateTime(hours = 3),
+        TimeSpent lessThanOrEqualTo 3.hours,
         // language=JQL
         expectedJql = """timeSpent <= "3h""""
     )

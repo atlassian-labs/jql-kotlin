@@ -1,62 +1,64 @@
 package com.atlassian.jira.jql.field
 
-import com.atlassian.jira.jql.RelativeDateTime
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.time.hours
+import com.atlassian.jira.jql.time.minutes
+import com.atlassian.jira.jql.time.weeks
 import org.junit.jupiter.api.Test
 
 internal class OriginalEstimateTest {
     @Test
     fun `original estimate equals to value`() = assertJql(
-        OriginalEstimate equalTo RelativeDateTime(hours = 1),
+        OriginalEstimate equalTo 1.hours,
         // language=JQL
         expectedJql = """originalEstimate = "1h""""
     )
 
     @Test
     fun `original estimate not equals to value`() = assertJql(
-        OriginalEstimate notEqualTo RelativeDateTime(minutes = 10),
+        OriginalEstimate notEqualTo 10.minutes,
         // language=JQL
         expectedJql = """originalEstimate != "10m""""
     )
 
     @Test
     fun `original estimate in values`() = assertJql(
-        OriginalEstimate anyOf listOf(RelativeDateTime(weeks = 1), RelativeDateTime(weeks = 2)),
+        OriginalEstimate anyOf listOf(1.weeks, 2.weeks),
         // language=JQL
         expectedJql = """originalEstimate in ("1w","2w")"""
     )
 
     @Test
     fun `original estimate not in values`() = assertJql(
-        OriginalEstimate noneOf listOf(RelativeDateTime(minutes = 1), RelativeDateTime(minutes = 5)),
+        OriginalEstimate noneOf listOf(1.minutes, 5.minutes),
         // language=JQL
         expectedJql = """originalEstimate not in ("1m","5m")"""
     )
 
     @Test
     fun `original estimate greater than value`() = assertJql(
-        OriginalEstimate greaterThan RelativeDateTime(hours = 2),
+        OriginalEstimate greaterThan 2.hours,
         // language=JQL
         expectedJql = """originalEstimate > "2h""""
     )
 
     @Test
     fun `original estimate greater than equals value`() = assertJql(
-        OriginalEstimate greaterThanOrEqualTo RelativeDateTime(minutes = 17),
+        OriginalEstimate greaterThanOrEqualTo 17.minutes,
         // language=JQ6
         expectedJql = """originalEstimate >= "17m""""
     )
 
     @Test
     fun `original estimate less than value`() = assertJql(
-        OriginalEstimate lessThan RelativeDateTime(weeks = 1),
+        OriginalEstimate lessThan 1.weeks,
         // language=JQL
         expectedJql = """originalEstimate < "1w""""
     )
 
     @Test
     fun `original estimate less than equals value`() = assertJql(
-        OriginalEstimate lessThanOrEqualTo RelativeDateTime(hours = 3),
+        OriginalEstimate lessThanOrEqualTo 3.hours,
         // language=JQL
         expectedJql = """originalEstimate <= "3h""""
     )

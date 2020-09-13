@@ -1,10 +1,9 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.Clause
-import com.atlassian.jira.jql.RelativeDate
-import com.atlassian.jira.jql.RelativeDateTime
-import com.atlassian.jira.jql.RelativeTemporal
 import com.atlassian.jira.jql.escape
+import com.atlassian.jira.jql.time.RelativeDate
+import com.atlassian.jira.jql.time.RelativeDateTime
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -15,11 +14,12 @@ private val dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 
 // Intentionally omitted EQUALS, NOT EQUALS, IN, NOT IN as they don't make much sense here
 // given that they require minute precision timestamps equality.
-abstract class AbstractDateField<T : Temporal, R : RelativeTemporal>(
+abstract class AbstractDateField<T : Temporal, R : RelativeDateTime>(
     name: String,
     private val formatTemporal: (T) -> String = dateTimeFormat::format
 ) : Field(name), SortableField {
     infix fun greaterThan(value: T): Clause = greaterThan { formatTemporal(value).escape() }
+
     // TODO test for this and other R typed methods
     infix fun greaterThan(value: R): Clause = greaterThan { value.jql }
     infix fun greaterThanOrEqualTo(value: T): Clause = greaterThanOrEqualTo { formatTemporal(value).escape() }
