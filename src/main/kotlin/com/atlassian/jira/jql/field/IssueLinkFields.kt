@@ -8,9 +8,9 @@ abstract class AbstractIssueLinkField(type: IssueLinkType.Value? = null) : Field
     type?.let { "issue${it.issueLinkSuffix}" } ?: "issueLink"
 ) {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
-    infix fun equalTo(value: Number): Clause = equalTo { value.toString() }
+    infix fun equalTo(value: Long): Clause = equalTo { value.toString() }
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
-    infix fun notEqualTo(value: Number): Clause = notEqualTo { value.toString() }
+    infix fun notEqualTo(value: Long): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
     infix fun anyOf(values: Numbers): Clause = anyOf { values.numbers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
