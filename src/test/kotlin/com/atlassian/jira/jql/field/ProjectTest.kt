@@ -41,7 +41,7 @@ internal class ProjectTest {
 
     @Test
     fun `project in numbers`() = assertJql(
-        Project anyOf numbers(1, 2, 3),
+        Project anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """project in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class ProjectTest {
 
     @Test
     fun `project not in numbers`() = assertJql(
-        Project noneOf numbers(4, 5, 6),
+        Project noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """project not in (4,5,6)"""
     )

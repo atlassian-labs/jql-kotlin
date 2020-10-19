@@ -16,7 +16,7 @@ private val dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 // given that they require minute precision timestamps equality.
 abstract class AbstractDateField<T : Temporal, R : RelativeDateTime>(
     name: String,
-    private val formatTemporal: (T) -> String = dateTimeFormat::format
+    private val formatTemporal: (T) -> String = dateTimeFormat::format,
 ) : Field(name), SortableField {
     infix fun greaterThan(value: T): Clause = greaterThan { formatTemporal(value).escape() }
     infix fun greaterThan(value: R): Clause = greaterThan { value.jql }

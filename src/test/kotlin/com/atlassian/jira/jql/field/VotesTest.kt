@@ -20,14 +20,14 @@ internal class VotesTest {
 
     @Test
     fun `votes in values`() = assertJql(
-        Votes anyOf numbers(1, 2, 3),
+        Votes anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """votes in (1,2,3)"""
     )
 
     @Test
     fun `votes not in values`() = assertJql(
-        Votes noneOf numbers(4, 5, 6),
+        Votes noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """votes not in (4,5,6)"""
     )

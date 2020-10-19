@@ -41,7 +41,7 @@ class EpicLinkTest {
 
     @Test
     fun `epic link in numbers`() = assertJql(
-        EpicLink anyOf numbers(1, 2, 3),
+        EpicLink anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """"epic link" in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ class EpicLinkTest {
 
     @Test
     fun `epic link not in numbers`() = assertJql(
-        EpicLink noneOf numbers(4, 5, 6),
+        EpicLink noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """"epic link" not in (4,5,6)"""
     )

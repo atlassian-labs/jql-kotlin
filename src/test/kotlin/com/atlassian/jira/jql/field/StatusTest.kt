@@ -41,7 +41,7 @@ internal class StatusTest {
 
     @Test
     fun `status in numbers`() = assertJql(
-        Status anyOf numbers(1, 2, 3),
+        Status anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """status in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class StatusTest {
 
     @Test
     fun `status not in numbers`() = assertJql(
-        Status noneOf numbers(4, 5, 6),
+        Status noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """status not in (4,5,6)"""
     )

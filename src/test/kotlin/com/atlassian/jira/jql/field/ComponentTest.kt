@@ -41,7 +41,7 @@ internal class ComponentTest {
 
     @Test
     fun `component in numbers`() = assertJql(
-        Component anyOf numbers(1, 2, 3),
+        Component anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """component in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class ComponentTest {
 
     @Test
     fun `component not in numbers`() = assertJql(
-        Component noneOf numbers(4, 5, 6),
+        Component noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """component not in (4,5,6)"""
     )

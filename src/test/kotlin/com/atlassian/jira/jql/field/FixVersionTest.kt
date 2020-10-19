@@ -41,7 +41,7 @@ internal class FixVersionTest {
 
     @Test
     fun `fix version in numbers`() = assertJql(
-        FixVersion anyOf numbers(1, 2, 3),
+        FixVersion anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """fixVersion in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class FixVersionTest {
 
     @Test
     fun `fix version not in numbers`() = assertJql(
-        FixVersion noneOf numbers(4, 5, 6),
+        FixVersion noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """fixVersion not in (4,5,6)"""
     )

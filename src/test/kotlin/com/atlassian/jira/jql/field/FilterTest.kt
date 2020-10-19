@@ -41,7 +41,7 @@ class FilterTest {
 
     @Test
     fun `filter in numbers`() = assertJql(
-        Filter anyOf numbers(1, 2, 3),
+        Filter anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """filter in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ class FilterTest {
 
     @Test
     fun `filter not in numbers`() = assertJql(
-        Filter noneOf numbers(4, 5, 6),
+        Filter noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """filter not in (4,5,6)"""
     )

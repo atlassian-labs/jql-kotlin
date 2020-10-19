@@ -3,7 +3,7 @@ package com.atlassian.jira.jql
 class CompoundClause(
     left: Clause,
     keyword: Keyword,
-    right: Clause
+    right: Clause,
 ) : Clause(
     arrayOf(left, right)
         // If either of the subclauses are effectively empty, the resulting JQL should

@@ -41,7 +41,7 @@ class ResolutionTest {
 
     @Test
     fun `resolution in numbers`() = assertJql(
-        Resolution anyOf numbers(1, 2, 3),
+        Resolution anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """resolution in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ class ResolutionTest {
 
     @Test
     fun `resolution not in numbers`() = assertJql(
-        Resolution noneOf numbers(4, 5, 6),
+        Resolution noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """resolution not in (4,5,6)"""
     )

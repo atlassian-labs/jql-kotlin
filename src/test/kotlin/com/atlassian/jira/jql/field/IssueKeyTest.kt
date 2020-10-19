@@ -41,7 +41,7 @@ class IssueKeyTest {
 
     @Test
     fun `issue key in numbers`() = assertJql(
-        IssueKey anyOf numbers(1, 2, 3),
+        IssueKey anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """issueKey in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ class IssueKeyTest {
 
     @Test
     fun `issue key not in numbers`() = assertJql(
-        IssueKey noneOf numbers(4, 5, 6),
+        IssueKey noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """issueKey not in (4,5,6)"""
     )

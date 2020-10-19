@@ -41,7 +41,7 @@ class AffectedVersionTest {
 
     @Test
     fun `affected version in numbers`() = assertJql(
-        AffectedVersion anyOf numbers(1, 2, 3),
+        AffectedVersion anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """affectedVersion in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ class AffectedVersionTest {
 
     @Test
     fun `affected version not in numbers`() = assertJql(
-        AffectedVersion noneOf numbers(4, 5, 6),
+        AffectedVersion noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """affectedVersion not in (4,5,6)"""
     )

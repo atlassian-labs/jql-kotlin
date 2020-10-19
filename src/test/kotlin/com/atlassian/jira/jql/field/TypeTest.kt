@@ -41,7 +41,7 @@ internal class TypeTest {
 
     @Test
     fun `type in numbers`() = assertJql(
-        Type anyOf numbers(1, 2, 3),
+        Type anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """type in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class TypeTest {
 
     @Test
     fun `type not in numbers`() = assertJql(
-        Type noneOf numbers(4, 5, 6),
+        Type noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """type not in (4,5,6)"""
     )

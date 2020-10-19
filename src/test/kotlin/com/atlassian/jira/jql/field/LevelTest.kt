@@ -41,7 +41,7 @@ internal class LevelTest {
 
     @Test
     fun `level in numbers`() = assertJql(
-        Level anyOf numbers(1, 2, 3),
+        Level anyOf ids(1, 2, 3),
         // language=JQL
         expectedJql = """level in (1,2,3)"""
     )
@@ -55,7 +55,7 @@ internal class LevelTest {
 
     @Test
     fun `level not in numbers`() = assertJql(
-        Level noneOf numbers(4, 5, 6),
+        Level noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """level not in (4,5,6)"""
     )
