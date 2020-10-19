@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.earliestUnreleasedVersion
+import com.atlassian.jira.jql.function.latestReleasedVersion
+import com.atlassian.jira.jql.function.releasedVersions
+import com.atlassian.jira.jql.function.unreleasedVersions
 import org.junit.jupiter.api.Test
 
 internal class FixVersionTest {
@@ -19,6 +23,13 @@ internal class FixVersionTest {
     )
 
     @Test
+    fun `fix version equals to function`() = assertJql(
+        FixVersion equalTo earliestUnreleasedVersion("foo"),
+        // language=JQL
+        expectedJql = """fixVersion = earliestUnreleasedVersion("foo")"""
+    )
+
+    @Test
     fun `fix version not equals to string`() = assertJql(
         FixVersion notEqualTo "Big Ted",
         // language=JQL
@@ -30,6 +41,13 @@ internal class FixVersionTest {
         FixVersion notEqualTo 123,
         // language=JQL
         expectedJql = """fixVersion != 123"""
+    )
+
+    @Test
+    fun `fix version not equals to function`() = assertJql(
+        FixVersion notEqualTo latestReleasedVersion(),
+        // language=JQL
+        expectedJql = """fixVersion != latestReleasedVersion()"""
     )
 
     @Test
@@ -47,6 +65,13 @@ internal class FixVersionTest {
     )
 
     @Test
+    fun `fix version in function`() = assertJql(
+        FixVersion anyOf unreleasedVersions(ids(5, 6, 7)),
+        // language=JQL
+        expectedJql = """fixVersion in unreleasedVersions(5,6,7)"""
+    )
+
+    @Test
     fun `fix version not in strings`() = assertJql(
         FixVersion noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -58,6 +83,13 @@ internal class FixVersionTest {
         FixVersion noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """fixVersion not in (4,5,6)"""
+    )
+
+    @Test
+    fun `fix version not in function`() = assertJql(
+        FixVersion noneOf releasedVersions(),
+        // language=JQL
+        expectedJql = """fixVersion not in releasedVersions()"""
     )
 
     @Test

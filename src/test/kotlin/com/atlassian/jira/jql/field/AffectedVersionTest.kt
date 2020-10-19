@@ -3,6 +3,8 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.earliestUnreleasedVersion
 import com.atlassian.jira.jql.function.latestReleasedVersion
+import com.atlassian.jira.jql.function.releasedVersions
+import com.atlassian.jira.jql.function.unreleasedVersions
 import org.junit.jupiter.api.Test
 
 class AffectedVersionTest {
@@ -63,6 +65,13 @@ class AffectedVersionTest {
     )
 
     @Test
+    fun `affected version in function`() = assertJql(
+        AffectedVersion anyOf releasedVersions("bar"),
+        // language=JQL
+        expectedJql = """affectedVersion in releasedVersions("bar")"""
+    )
+
+    @Test
     fun `affected version not in strings`() = assertJql(
         AffectedVersion noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -74,6 +83,13 @@ class AffectedVersionTest {
         AffectedVersion noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """affectedVersion not in (4,5,6)"""
+    )
+
+    @Test
+    fun `affected version not in function`() = assertJql(
+        AffectedVersion noneOf unreleasedVersions(),
+        // language=JQL
+        expectedJql = """affectedVersion not in unreleasedVersions()"""
     )
 
     @Test

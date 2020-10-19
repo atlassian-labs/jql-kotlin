@@ -2,10 +2,12 @@ package com.atlassian.jira.jql.function
 
 import com.atlassian.jira.jql.JqlEntity
 
-abstract class Function(
+interface Function : JqlEntity
+
+abstract class AbstractFunction(
     private val name: String,
     private val arguments: List<String> = emptyList(),
-) : JqlEntity {
+) : Function {
     override fun toJql() = "$name(${arguments.joinToString(separator = ",")})"
 }
 

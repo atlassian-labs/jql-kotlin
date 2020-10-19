@@ -1,24 +1,23 @@
 package com.atlassian.jira.jql.function
 
-import com.atlassian.jira.jql.JqlEntity
 import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.field.Identifiers
 
-interface ApprovalsFunction : JqlEntity
+interface ApprovalsFunction : Function
 
-fun approved(): ApprovalsFunction = object : Function("approved"), ApprovalsFunction {}
+fun approved(): ApprovalsFunction = object : AbstractFunction("approved"), ApprovalsFunction {}
 
 fun approver(vararg users: String): ApprovalsFunction =
-    object : Function("approver", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}
+    object : AbstractFunction("approver", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}
 
 fun approver(userIds: Identifiers): ApprovalsFunction =
-    object : Function("approver", userIds.identifiers.map { it.toString() }), ApprovalsFunction {}
+    object : AbstractFunction("approver", userIds.identifiers.map { it.toString() }), ApprovalsFunction {}
 
-fun myApproval(): ApprovalsFunction = object : Function("myApproval"), ApprovalsFunction {}
+fun myApproval(): ApprovalsFunction = object : AbstractFunction("myApproval"), ApprovalsFunction {}
 
-fun myPending(): ApprovalsFunction = object : Function("myPending"), ApprovalsFunction {}
+fun myPending(): ApprovalsFunction = object : AbstractFunction("myPending"), ApprovalsFunction {}
 
-fun pending(): ApprovalsFunction = object : Function("pending"), ApprovalsFunction {}
+fun pending(): ApprovalsFunction = object : AbstractFunction("pending"), ApprovalsFunction {}
 
 fun pendingBy(vararg users: String): ApprovalsFunction =
-    object : Function("pendingBy", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}
+    object : AbstractFunction("pendingBy", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}

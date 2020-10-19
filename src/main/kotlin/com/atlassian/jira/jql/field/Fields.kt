@@ -18,7 +18,7 @@ object Attachments : Field("attachments") {
 }
 
 object Approvals : Field("approvals") {
-    infix fun equalTo(function: ApprovalsFunction): Clause = equalTo { function.toJql() }
+    infix fun equalTo(function: ApprovalsFunction): Clause = super.equalTo(function)
 }
 
 object Category : Field("category") {

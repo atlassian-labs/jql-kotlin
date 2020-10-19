@@ -15,6 +15,7 @@ import com.atlassian.jira.jql.Operator.LESS_THAN
 import com.atlassian.jira.jql.Operator.LESS_THAN_EQUALS
 import com.atlassian.jira.jql.Operator.NOT_EQUALS
 import com.atlassian.jira.jql.Operator.NOT_IN
+import com.atlassian.jira.jql.function.Function
 
 interface FieldName {
     val name: String
@@ -27,9 +28,13 @@ interface SortableField : FieldName {
 
 abstract class Field(override val name: String) : FieldName {
     protected fun equalTo(valueProvider: () -> String) = clause(EQUALS, valueProvider())
+    protected fun equalTo(function: Function) = clause(EQUALS, function.toJql())
     protected fun notEqualTo(valueProvider: () -> String) = clause(NOT_EQUALS, valueProvider())
+    protected fun notEqualTo(function: Function) = clause(NOT_EQUALS, function.toJql())
     protected fun anyOf(valuesProvider: () -> Collection<String>) = clause(IN, valuesProvider())
+    protected fun anyOf(function: Function) = clause(IN, function.toJql())
     protected fun noneOf(valuesProvider: () -> Collection<String>) = clause(NOT_IN, valuesProvider())
+    protected fun noneOf(function: Function) = clause(NOT_IN, function.toJql())
 
     protected fun greaterThan(valueProvider: () -> String) = clause(GREATER_THAN, valueProvider())
     protected fun greaterThanOrEqualTo(valueProvider: () -> String) = clause(GREATER_THAN_EQUALS, valueProvider())

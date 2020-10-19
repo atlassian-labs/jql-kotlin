@@ -52,4 +52,52 @@ class VersionFunctionTest {
         earliestUnreleasedVersion(ids(1, 2, 3)),
         expectedJql = """earliestUnreleasedVersion(1,2,3)"""
     )
+
+    @Test
+    fun `releasedVersions allows no arguments`() {
+        assertJql(
+            releasedVersions(),
+            expectedJql = "releasedVersions()"
+        )
+        assertJql(
+            releasedVersions(ids()),
+            expectedJql = "releasedVersions()"
+        )
+    }
+
+    @Test
+    fun `releasedVersions with string arguments`() = assertJql(
+        releasedVersions("foo", "bar"),
+        expectedJql = """releasedVersions("foo","bar")"""
+    )
+
+    @Test
+    fun `releasedVersions with identifier arguments`() = assertJql(
+        releasedVersions(ids(1, 2, 3)),
+        expectedJql = """releasedVersions(1,2,3)"""
+    )
+
+    @Test
+    fun `unreleasedVersions allows no arguments`() {
+        assertJql(
+            unreleasedVersions(),
+            expectedJql = "unreleasedVersions()"
+        )
+        assertJql(
+            unreleasedVersions(ids()),
+            expectedJql = "unreleasedVersions()"
+        )
+    }
+
+    @Test
+    fun `unreleasedVersions with string arguments`() = assertJql(
+        unreleasedVersions("foo", "bar"),
+        expectedJql = """unreleasedVersions("foo","bar")"""
+    )
+
+    @Test
+    fun `unreleasedVersions with identifier arguments`() = assertJql(
+        unreleasedVersions(ids(1, 2, 3)),
+        expectedJql = """unreleasedVersions(1,2,3)"""
+    )
 }
