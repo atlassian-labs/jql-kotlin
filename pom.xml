@@ -18,6 +18,8 @@
         <kotlin.version>1.4.10</kotlin.version>
 
         <junit.jupiter.version>5.6.2</junit.jupiter.version>
+
+        <ktlint.version>0.39.0</ktlint.version>
     </properties>
 
     <dependencies>
@@ -92,7 +94,7 @@
             <plugin>
                 <groupId>com.github.gantsign.maven</groupId>
                 <artifactId>ktlint-maven-plugin</artifactId>
-                <version>1.5.2</version>
+                <version>1.6.1</version>
                 <executions>
                     <execution>
                         <id>format-and-check</id>
@@ -103,6 +105,43 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.pinterest</groupId>
+                        <artifactId>ktlint</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-core</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-reporter-checkstyle</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-reporter-json</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-reporter-plain</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-ruleset-experimental</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.pinterest.ktlint</groupId>
+                        <artifactId>ktlint-ruleset-standard</artifactId>
+                        <version>${ktlint.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
 
             <plugin>
