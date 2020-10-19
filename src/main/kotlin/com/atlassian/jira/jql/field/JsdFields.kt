@@ -2,13 +2,14 @@ package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.escape
+import com.atlassian.jira.jql.function.ApprovalsFunction
 import com.atlassian.jira.jql.time.RelativeDateTime
 import com.atlassian.jira.jql.time.RelativeTime
 import java.time.LocalDateTime
 
 object Jsd {
     object Approvals : Field("approvals") {
-        val todo: Nothing = TODO("Only functions here")
+        infix fun equalTo(function: ApprovalsFunction): Clause = equalTo { function.toJql() }
     }
 
     object ChangeControlType : Field("change-control-type") {
