@@ -1,7 +1,6 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
-import com.atlassian.jira.jql.field.Jsd.Organization
 import org.junit.jupiter.api.Test
 
 internal class OrganizationTest {

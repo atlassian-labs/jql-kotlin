@@ -3,6 +3,9 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.Identifier
 import com.atlassian.jira.jql.escape
+import com.atlassian.jira.jql.function.ApprovalsFunction
+import com.atlassian.jira.jql.time.RelativeDateTime
+import java.time.LocalDateTime
 
 class Identifiers internal constructor(internal val numbers: Collection<Identifier>)
 
@@ -14,7 +17,20 @@ object Attachments : Field("attachments") {
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
 
+object Approvals : Field("approvals") {
+    infix fun equalTo(function: ApprovalsFunction): Clause = equalTo { function.toJql() }
+}
+
 object Category : Field("category") {
+    infix fun equalTo(value: String): Clause = equalTo { value.escape() }
+    infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
+    infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
+    infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
+    infix fun iz(value: IsIsNotValue): Clause = iz { value }
+    infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
+}
+
+object ChangeControlType : Field("change-control-type") {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
@@ -34,6 +50,13 @@ object Component : Field("component"), SortableField {
     infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
+}
+
+object CustomerRequestType : Field("\"Customer Request Type\"") {
+    infix fun equalTo(value: String): Clause = equalTo { value.escape() }
+    infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
+    infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
+    infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
 }
 
 object EpicLink : Field("\"epic link\""), SortableField {
@@ -101,6 +124,13 @@ object Level : Field("level"), SortableField {
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
 
+object Organization : Field("organizations") {
+    infix fun equalTo(value: String): Clause = equalTo { value.escape() }
+    infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
+    infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
+    infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
+}
+
 object Parent : Field("parent"), SortableField {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = equalTo { value.toString() }
@@ -159,6 +189,25 @@ object ProjectType : Field("projectType") {
         object JiraOps : Value("ops")
     }
 }
+
+object RequestChannelType : Field("request-channel-type") {
+    infix fun equalTo(value: Value): Clause = equalTo { value.jql }
+    infix fun notEqualTo(value: Value): Clause = notEqualTo { value.jql }
+    infix fun anyOf(values: Collection<Value>): Clause = anyOf { values.map { it.jql } }
+    infix fun noneOf(values: Collection<Value>): Clause = noneOf { values.map { it.jql } }
+    infix fun iz(value: IsIsNotValue): Clause = iz { value }
+    infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
+
+    class Value(val jql: String)
+
+    val email = Value("email")
+    val jira = Value("jira")
+    val portal = Value("portal")
+    val anonymousPortal = Value("\"anonymous portal\"")
+    val api = Value("api")
+}
+
+object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")
 
 object Resolution : Field("resolution"), SortableField {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }

@@ -1,12 +1,11 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType.anonymousPortal
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType.api
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType.email
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType.jira
-import com.atlassian.jira.jql.field.Jsd.RequestChannelType.portal
+import com.atlassian.jira.jql.field.RequestChannelType.anonymousPortal
+import com.atlassian.jira.jql.field.RequestChannelType.api
+import com.atlassian.jira.jql.field.RequestChannelType.email
+import com.atlassian.jira.jql.field.RequestChannelType.jira
+import com.atlassian.jira.jql.field.RequestChannelType.portal
 import org.junit.jupiter.api.Test
 
 internal class RequestChannelTypeTest {

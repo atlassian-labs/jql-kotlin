@@ -1,9 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
-import com.atlassian.jira.jql.field.Jsd.Sla
-import com.atlassian.jira.jql.field.Jsd.Sla.TimeToFirstResponse
-import com.atlassian.jira.jql.field.Jsd.Sla.TimeToResolution
+import com.atlassian.jira.jql.field.Sla.TimeToFirstResponse
+import com.atlassian.jira.jql.field.Sla.TimeToResolution
 import com.atlassian.jira.jql.time.hours
 import com.atlassian.jira.jql.time.minutes
 import org.junit.jupiter.api.Test

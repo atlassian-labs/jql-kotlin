@@ -1,7 +1,6 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
-import com.atlassian.jira.jql.field.Jsd.Approvals
 import com.atlassian.jira.jql.function.approved
 import com.atlassian.jira.jql.function.approver
 import com.atlassian.jira.jql.function.myApproval

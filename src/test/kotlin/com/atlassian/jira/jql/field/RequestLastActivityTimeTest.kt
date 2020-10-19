@@ -1,7 +1,6 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
-import com.atlassian.jira.jql.field.Jsd.RequestLastActivityTime
 import com.atlassian.jira.jql.time.d
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
