@@ -18,10 +18,17 @@ class ApprovalsTest {
     )
 
     @Test
-    fun `approvals equals to approver()`() = assertJql(
+    fun `approvals equals to approver() with strings`() = assertJql(
         Approvals equalTo approver("John Smith", "bob@mycompany.com"),
         // language=JQL
         expectedJql = """approvals = approver("John Smith","bob@mycompany.com")"""
+    )
+
+    @Test
+    fun `approvals equals to approver() with ids`() = assertJql(
+        Approvals equalTo approver(ids(1, 2)),
+        // language=JQL
+        expectedJql = """approvals = approver(1,2)"""
     )
 
     @Test

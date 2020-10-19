@@ -7,7 +7,7 @@ import com.atlassian.jira.jql.function.ApprovalsFunction
 import com.atlassian.jira.jql.time.RelativeDateTime
 import java.time.LocalDateTime
 
-class Identifiers internal constructor(internal val numbers: Collection<Identifier>)
+class Identifiers internal constructor(internal val identifiers: Collection<Identifier>)
 
 fun ids(values: Collection<Identifier>) = Identifiers(values)
 fun ids(vararg values: Identifier) = Identifiers(values.toList())
@@ -45,9 +45,9 @@ object Component : Field("component"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -65,9 +65,9 @@ object EpicLink : Field("\"epic link\""), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -78,9 +78,9 @@ object Filter : Field("filter") {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
 }
 
 object IssueKey : Field("issueKey"), SortableField {
@@ -89,9 +89,9 @@ object IssueKey : Field("issueKey"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun greaterThan(value: String): Clause = greaterThan { value.escape() }
     infix fun greaterThan(value: Identifier): Clause = greaterThan { value.toString() }
     infix fun greaterThanOrEqualTo(value: String): Clause = greaterThanOrEqualTo { value.escape() }
@@ -117,9 +117,9 @@ object Level : Field("level"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -137,9 +137,9 @@ object Parent : Field("parent"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
 }
 
 object Priority : Field("priority"), SortableField {
@@ -148,9 +148,9 @@ object Priority : Field("priority"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun greaterThan(value: String): Clause = greaterThan { value.escape() }
     infix fun greaterThan(value: Identifier): Clause = greaterThan { value.toString() }
     infix fun greaterThanOrEqualTo(value: String): Clause = greaterThanOrEqualTo { value.escape() }
@@ -169,9 +169,9 @@ object Project : Field("project"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -215,9 +215,9 @@ object Resolution : Field("resolution"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun greaterThan(value: String): Clause = greaterThan { value.escape() }
     infix fun greaterThan(value: Identifier): Clause = greaterThan { value.toString() }
     infix fun greaterThanOrEqualTo(value: String): Clause = greaterThanOrEqualTo { value.escape() }
@@ -236,9 +236,9 @@ object Sprint : Field("sprint"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -249,9 +249,9 @@ object Status : Field("status"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -262,9 +262,9 @@ object Type : Field("type"), SortableField {
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }

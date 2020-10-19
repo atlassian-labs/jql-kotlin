@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.earliestUnreleasedVersion
+import com.atlassian.jira.jql.function.latestReleasedVersion
 import org.junit.jupiter.api.Test
 
 class AffectedVersionTest {
@@ -19,6 +21,13 @@ class AffectedVersionTest {
     )
 
     @Test
+    fun `affected version equals to function`() = assertJql(
+        AffectedVersion equalTo latestReleasedVersion("foo"),
+        // language=JQL
+        expectedJql = """affectedVersion = latestReleasedVersion("foo")"""
+    )
+
+    @Test
     fun `affected version not equals to string`() = assertJql(
         AffectedVersion notEqualTo "Big Ted",
         // language=JQL
@@ -30,6 +39,13 @@ class AffectedVersionTest {
         AffectedVersion notEqualTo 123,
         // language=JQL
         expectedJql = """affectedVersion != 123"""
+    )
+
+    @Test
+    fun `affected version not equals to function`() = assertJql(
+        AffectedVersion notEqualTo earliestUnreleasedVersion(),
+        // language=JQL
+        expectedJql = """affectedVersion != earliestUnreleasedVersion()"""
     )
 
     @Test

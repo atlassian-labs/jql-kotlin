@@ -20,14 +20,14 @@ internal class WatchersTest {
 
     @Test
     fun `watchers in values`() = assertJql(
-        Watchers anyOf ids(1, 2, 3),
+        Watchers anyOf listOf(1, 2, 3),
         // language=JQL
         expectedJql = """watchers in (1,2,3)"""
     )
 
     @Test
     fun `watchers not in values`() = assertJql(
-        Watchers noneOf ids(4, 5, 6),
+        Watchers noneOf listOf(4, 5, 6),
         // language=JQL
         expectedJql = """watchers not in (4,5,6)"""
     )

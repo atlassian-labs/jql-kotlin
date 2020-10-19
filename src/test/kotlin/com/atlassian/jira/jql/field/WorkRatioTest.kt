@@ -20,14 +20,14 @@ internal class WorkRatioTest {
 
     @Test
     fun `work ratio in values`() = assertJql(
-        WorkRatio anyOf ids(1, 2, 3),
+        WorkRatio anyOf listOf(1, 2, 3),
         // language=JQL
         expectedJql = """workRatio in (1,2,3)"""
     )
 
     @Test
     fun `work ratio not in values`() = assertJql(
-        WorkRatio noneOf ids(4, 5, 6),
+        WorkRatio noneOf listOf(4, 5, 6),
         // language=JQL
         expectedJql = """workRatio not in (4,5,6)"""
     )

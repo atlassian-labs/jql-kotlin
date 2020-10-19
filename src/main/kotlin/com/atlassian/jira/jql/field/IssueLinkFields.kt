@@ -13,9 +13,9 @@ abstract class AbstractIssueLinkField(type: IssueLinkType.Value? = null) : Field
     infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.numbers.map { it.toString() } }
+    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.numbers.map { it.toString() } }
+    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
 }
 
 object IssueLink : AbstractIssueLinkField() {

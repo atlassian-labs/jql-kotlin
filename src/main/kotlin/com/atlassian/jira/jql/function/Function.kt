@@ -9,5 +9,5 @@ abstract class Function(
     override fun toJql() = "$name(${arguments.joinToString(separator = ",")})"
 }
 
-internal fun <T> Array<out T>.requireAtLeastOneArgument() =
+internal fun <T : Any> Array<out T>.requireAtLeastOneArgument() =
     takeIf { it.isNotEmpty() } ?: throw IllegalArgumentException("At least one argument is required for a function")
