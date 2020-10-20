@@ -10,3 +10,7 @@ fun currentUser(): UserEqualityFunction =
 
 fun membersOf(group: String): UserInclusionFunction =
     object : AbstractFunction("membersOf", listOf(group.escape())), UserInclusionFunction {}
+
+fun organizationMembers(vararg organizations: String): UserInclusionFunction = organizationMembers(organizations.toList())
+fun organizationMembers(organizations: Collection<String>): UserInclusionFunction =
+    object : AbstractFunction("membersOf", organizations.requireAtLeastOneArgument().map { it.escape() }), UserInclusionFunction {}
