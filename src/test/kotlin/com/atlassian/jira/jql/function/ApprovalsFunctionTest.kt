@@ -17,18 +17,16 @@ class ApprovalsFunctionTest {
     }
 
     @Test
-    fun `approver with string arguments`() =
-        assertJql(
-            approver("foo", "bar"),
-            expectedJql = """approver("foo","bar")"""
-        )
+    fun `approver with string arguments`() = assertJql(
+        approver("foo", "bar"),
+        expectedJql = """approver("foo","bar")"""
+    )
 
     @Test
-    fun `approver with string collection argument`() =
-        assertJql(
-            approver(listOf("foo", "bar")),
-            expectedJql = """approver("foo","bar")"""
-        )
+    fun `approver with string collection argument`() = assertJql(
+        approver(listOf("foo", "bar")),
+        expectedJql = """approver("foo","bar")"""
+    )
 
     @Test
     fun `myApproval function`() = assertJql(
@@ -54,16 +52,14 @@ class ApprovalsFunctionTest {
     }
 
     @Test
-    fun `pendingBy with string arguments`() =
-        assertJql(
-            pendingBy("foo", "bar"),
-            expectedJql = """pendingBy("foo","bar")"""
-        )
+    fun `pendingBy with string arguments`() = assertJql(
+        pendingBy("foo", "bar"),
+        expectedJql = """pendingBy("foo","bar")"""
+    )
 
     @Test
-    fun `pendingBy with string collection argument`() =
-        assertJql(
-            pendingBy(listOf("foo", "bar")),
-            expectedJql = """pendingBy("foo","bar")"""
-        )
+    fun `pendingBy with string collection argument`() = assertJql(
+        pendingBy(listOf("foo", "bar")),
+        expectedJql = """pendingBy("foo","bar")"""
+    )
 }

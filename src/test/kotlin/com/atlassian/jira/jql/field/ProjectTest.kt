@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.projectsLeadByUser
+import com.atlassian.jira.jql.function.projectsWhereUserHasRole
 import org.junit.jupiter.api.Test
 
 internal class ProjectTest {
@@ -47,6 +49,13 @@ internal class ProjectTest {
     )
 
     @Test
+    fun `project in function`() = assertJql(
+        Project anyOf projectsLeadByUser("John Smith"),
+        // language=JQL
+        expectedJql = """project in projectsLeadByUser("John Smith")"""
+    )
+
+    @Test
     fun `project not in strings`() = assertJql(
         Project noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -58,6 +67,13 @@ internal class ProjectTest {
         Project noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """project not in (4,5,6)"""
+    )
+
+    @Test
+    fun `project not in function`() = assertJql(
+        Project noneOf projectsWhereUserHasRole("Administrators"),
+        // language=JQL
+        expectedJql = """project not in projectsWhereUserHasRole("Administrators")"""
     )
 
     @Test

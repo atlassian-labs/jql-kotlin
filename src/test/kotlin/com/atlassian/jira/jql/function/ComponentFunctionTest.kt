@@ -11,9 +11,8 @@ class ComponentFunctionTest {
     )
 
     @Test
-    fun `componentsLeadByUser with an argument`() =
-        assertJql(
-            componentsLeadByUser("foo"),
-            expectedJql = """componentsLeadByUser("foo")"""
-        )
+    fun `componentsLeadByUser with an argument`() = assertJql(
+        componentsLeadByUser("foo"),
+        expectedJql = """componentsLeadByUser("foo")"""
+    )
 }

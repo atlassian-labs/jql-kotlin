@@ -11,9 +11,8 @@ class UserFunctionTest {
     )
 
     @Test
-    fun `membersOf function`() =
-        assertJql(
-            membersOf("foo"),
-            expectedJql = """membersOf("foo")"""
-        )
+    fun `membersOf function`() = assertJql(
+        membersOf("foo"),
+        expectedJql = """membersOf("foo")"""
+    )
 }

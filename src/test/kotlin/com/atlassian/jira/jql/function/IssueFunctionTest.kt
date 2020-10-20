@@ -36,16 +36,14 @@ class IssueFunctionTest {
     }
 
     @Test
-    fun `votedIssues function`() =
-        assertJql(
-            votedIssues(),
-            expectedJql = """votedIssues()"""
-        )
+    fun `votedIssues function`() = assertJql(
+        votedIssues(),
+        expectedJql = """votedIssues()"""
+    )
 
     @Test
-    fun `watchedIssues function`() =
-        assertJql(
-            watchedIssues(),
-            expectedJql = """watchedIssues()"""
-        )
+    fun `watchedIssues function`() = assertJql(
+        watchedIssues(),
+        expectedJql = """watchedIssues()"""
+    )
 }

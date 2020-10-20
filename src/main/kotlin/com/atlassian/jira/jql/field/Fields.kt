@@ -6,6 +6,7 @@ import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.ApprovalsFunction
 import com.atlassian.jira.jql.function.ComponentFunction
 import com.atlassian.jira.jql.function.IssueFunction
+import com.atlassian.jira.jql.function.ProjectFunction
 
 class Identifiers internal constructor(internal val identifiers: Collection<Identifier>)
 
@@ -176,8 +177,10 @@ object Project : Field("project"), SortableField {
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
     infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
+    infix fun anyOf(function: ProjectFunction): Clause = super.anyOf(function)
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
     infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(function: ProjectFunction): Clause = super.noneOf(function)
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }

@@ -19,6 +19,7 @@ class WatcherTest {
         // language=JQL
         expectedJql = """watcher = currentUser()"""
     )
+
     @Test
     fun `watcher not equals to value`() = assertJql(
         Watcher notEqualTo "bob@mycompany.com",
@@ -32,6 +33,7 @@ class WatcherTest {
         // language=JQL
         expectedJql = """watcher != currentUser()"""
     )
+
     @Test
     fun `watcher in values`() = assertJql(
         Watcher anyOf listOf("foo", "bar", "baz"),
