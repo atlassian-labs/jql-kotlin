@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.endOfWeek
+import com.atlassian.jira.jql.function.startOfMonth
+import com.atlassian.jira.jql.function.startOfWeek
+import com.atlassian.jira.jql.function.startOfYear
 import com.atlassian.jira.jql.time.d
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
@@ -24,6 +28,13 @@ class UpdatedTest {
     )
 
     @Test
+    fun `updated greater than function`() = assertJql(
+        Updated greaterThan startOfWeek(),
+        // language=JQL
+        expectedJql = """updated > startOfWeek()"""
+    )
+
+    @Test
     fun `updated greater than equals timestamp`() = assertJql(
         Updated greaterThanOrEqualTo LocalDateTime.of(2020, 9, 10, 18, 50),
         // language=JQL
@@ -35,6 +46,13 @@ class UpdatedTest {
         Updated greaterThanOrEqualTo 2.d.ago,
         // language=JQL
         expectedJql = """updated >= "-2d""""
+    )
+
+    @Test
+    fun `updated greater than equals function`() = assertJql(
+        Updated greaterThanOrEqualTo startOfMonth(),
+        // language=JQL
+        expectedJql = """updated >= startOfMonth()"""
     )
 
     @Test
@@ -52,6 +70,13 @@ class UpdatedTest {
     )
 
     @Test
+    fun `updated less than function`() = assertJql(
+        Updated lessThan startOfYear(),
+        // language=JQL
+        expectedJql = """updated < startOfYear()"""
+    )
+
+    @Test
     fun `updated less than equals timestamp`() = assertJql(
         Updated lessThanOrEqualTo LocalDateTime.of(2020, 9, 10, 18, 52),
         // language=JQL
@@ -63,6 +88,13 @@ class UpdatedTest {
         Updated lessThanOrEqualTo (4.h + 30.m).ago,
         // language=JQL
         expectedJql = """updated <= "-4h 30m""""
+    )
+
+    @Test
+    fun `updated less than equals function`() = assertJql(
+        Updated lessThanOrEqualTo endOfWeek(18.w.ago),
+        // language=JQL
+        expectedJql = """updated <= endOfWeek("-18w")"""
     )
 
     @Test

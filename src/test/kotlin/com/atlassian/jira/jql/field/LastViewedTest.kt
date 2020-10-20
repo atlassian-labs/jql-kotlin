@@ -1,10 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.endOfMonth
+import com.atlassian.jira.jql.function.endOfWeek
+import com.atlassian.jira.jql.function.startOfMonth
+import com.atlassian.jira.jql.function.startOfWeek
 import com.atlassian.jira.jql.time.d
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
+import com.atlassian.jira.jql.time.weeks
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
@@ -24,6 +29,13 @@ class LastViewedTest {
     )
 
     @Test
+    fun `last viewed greater than function`() = assertJql(
+        LastViewed greaterThan startOfWeek(),
+        // language=JQL
+        expectedJql = """lastViewed > startOfWeek()"""
+    )
+
+    @Test
     fun `last viewed greater than equals timestamp`() = assertJql(
         LastViewed greaterThanOrEqualTo LocalDateTime.of(2020, 8, 30, 23, 46),
         // language=JQL
@@ -35,6 +47,13 @@ class LastViewedTest {
         LastViewed greaterThanOrEqualTo 1.w.ago,
         // language=JQL
         expectedJql = """lastViewed >= "-1w""""
+    )
+
+    @Test
+    fun `last viewed greater than equals function`() = assertJql(
+        LastViewed greaterThanOrEqualTo startOfMonth(),
+        // language=JQL
+        expectedJql = """lastViewed >= startOfMonth()"""
     )
 
     @Test
@@ -52,6 +71,13 @@ class LastViewedTest {
     )
 
     @Test
+    fun `last viewed less than function`() = assertJql(
+        LastViewed lessThan endOfMonth(10.weeks.ago),
+        // language=JQL
+        expectedJql = """lastViewed < endOfMonth("-10w")"""
+    )
+
+    @Test
     fun `last viewed less than equals timestamp`() = assertJql(
         LastViewed lessThanOrEqualTo LocalDateTime.of(2020, 8, 30, 23, 42),
         // language=JQL
@@ -63,6 +89,13 @@ class LastViewedTest {
         LastViewed lessThanOrEqualTo 1.w.ago,
         // language=JQL
         expectedJql = """lastViewed <= "-1w""""
+    )
+
+    @Test
+    fun `last viewed less than equals function`() = assertJql(
+        LastViewed lessThanOrEqualTo endOfWeek(72.d.ago),
+        // language=JQL
+        expectedJql = """lastViewed <= endOfWeek("-72d")"""
     )
 
     @Test

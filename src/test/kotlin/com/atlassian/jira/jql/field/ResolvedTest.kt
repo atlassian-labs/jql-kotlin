@@ -1,6 +1,10 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.endOfWeek
+import com.atlassian.jira.jql.function.startOfMonth
+import com.atlassian.jira.jql.function.startOfWeek
+import com.atlassian.jira.jql.function.startOfYear
 import com.atlassian.jira.jql.time.d
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
@@ -24,6 +28,13 @@ class ResolvedTest {
     )
 
     @Test
+    fun `resolved greater than function`() = assertJql(
+        Resolved greaterThan startOfWeek(),
+        // language=JQL
+        expectedJql = """resolved > startOfWeek()"""
+    )
+
+    @Test
     fun `resolved greater than equals timestamp`() = assertJql(
         Resolved greaterThanOrEqualTo LocalDateTime.of(2020, 9, 10, 17, 56),
         // language=JQL
@@ -35,6 +46,13 @@ class ResolvedTest {
         Resolved greaterThanOrEqualTo 13.m.ago,
         // language=JQL
         expectedJql = """resolved >= "-13m""""
+    )
+
+    @Test
+    fun `resolved greater than equals function`() = assertJql(
+        Resolved greaterThanOrEqualTo startOfMonth(),
+        // language=JQL
+        expectedJql = """resolved >= startOfMonth()"""
     )
 
     @Test
@@ -52,6 +70,13 @@ class ResolvedTest {
     )
 
     @Test
+    fun `resolved less than function`() = assertJql(
+        Resolved lessThan startOfYear(),
+        // language=JQL
+        expectedJql = """resolved < startOfYear()"""
+    )
+
+    @Test
     fun `resolved less than equals timestamp`() = assertJql(
         Resolved lessThanOrEqualTo LocalDateTime.of(2020, 9, 10, 17, 57),
         // language=JQL
@@ -63,6 +88,13 @@ class ResolvedTest {
         Resolved lessThanOrEqualTo 3.w.ago,
         // language=JQL
         expectedJql = """resolved <= "-3w""""
+    )
+
+    @Test
+    fun `resolved less than equals function`() = assertJql(
+        Resolved lessThanOrEqualTo endOfWeek(),
+        // language=JQL
+        expectedJql = """resolved <= endOfWeek()"""
     )
 
     @Test

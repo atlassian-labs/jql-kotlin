@@ -1,7 +1,12 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.endOfWeek
+import com.atlassian.jira.jql.function.startOfMonth
+import com.atlassian.jira.jql.function.startOfWeek
+import com.atlassian.jira.jql.function.startOfYear
 import com.atlassian.jira.jql.time.d
+import com.atlassian.jira.jql.time.days
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
@@ -24,6 +29,13 @@ class RequestLastActivityTimeTest {
     )
 
     @Test
+    fun `request last activity time greater than function`() = assertJql(
+        RequestLastActivityTime greaterThan startOfWeek(),
+        // language=JQL
+        expectedJql = """request-last-activity-time > startOfWeek()"""
+    )
+
+    @Test
     fun `request last activity time greater than equals timestamp`() = assertJql(
         RequestLastActivityTime greaterThanOrEqualTo LocalDateTime.of(2020, 9, 9, 13, 7),
         // language=JQL
@@ -35,6 +47,13 @@ class RequestLastActivityTimeTest {
         RequestLastActivityTime greaterThanOrEqualTo 5.w.ago,
         // language=JQL
         expectedJql = """request-last-activity-time >= "-5w""""
+    )
+
+    @Test
+    fun `request last activity time greater than equals function`() = assertJql(
+        RequestLastActivityTime greaterThanOrEqualTo startOfMonth(),
+        // language=JQL
+        expectedJql = """request-last-activity-time >= startOfMonth()"""
     )
 
     @Test
@@ -52,6 +71,13 @@ class RequestLastActivityTimeTest {
     )
 
     @Test
+    fun `request last activity time less than function`() = assertJql(
+        RequestLastActivityTime lessThan startOfYear(),
+        // language=JQL
+        expectedJql = """request-last-activity-time < startOfYear()"""
+    )
+
+    @Test
     fun `request last activity time less than equals timestamp`() = assertJql(
         RequestLastActivityTime lessThanOrEqualTo LocalDateTime.of(2020, 8, 24, 1, 39),
         // language=JQL
@@ -63,6 +89,13 @@ class RequestLastActivityTimeTest {
         RequestLastActivityTime lessThanOrEqualTo 15.m.ago,
         // language=JQL
         expectedJql = """request-last-activity-time <= "-15m""""
+    )
+
+    @Test
+    fun `request last activity time less than equals function`() = assertJql(
+        RequestLastActivityTime lessThanOrEqualTo endOfWeek(10.days.ago),
+        // language=JQL
+        expectedJql = """request-last-activity-time <= endOfWeek("-10d")"""
     )
 
     @Test

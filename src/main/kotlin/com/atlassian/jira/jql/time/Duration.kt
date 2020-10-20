@@ -6,11 +6,6 @@ interface Duration {
     val fromNow: RelativeDateTime get() = relativeDateTime(jql)
 }
 
-interface DateDuration : Duration {
-    override val ago: RelativeDate get() = relativeDate(jql, negative = true)
-    override val fromNow: RelativeDate get() = relativeDate(jql)
-}
-
 interface TimeDuration : Duration {
     override val ago get() = relativeTime(jql, negative = true)
     override val fromNow get() = relativeTime(jql)
@@ -36,13 +31,13 @@ abstract class AbstractDurationComponent(internal val value: Int, unit: Char) {
     val jql = value.takeIf { it > 0 }?.let { "\"$it$unit\"" } ?: ""
 }
 
-class Weeks internal constructor(value: Int) : AbstractDurationComponent(value, 'w'), DateDuration {
+class Weeks internal constructor(value: Int) : AbstractDurationComponent(value, 'w'), Duration {
     operator fun plus(days: Days) = WeeksAndDays(weeks = this, days = days)
     operator fun plus(hours: Hours) = WeeksDaysAndHours(weeks = this, hours = hours)
     operator fun plus(minutes: Minutes) = DateTimeDuration(weeks = this, minutes = minutes)
 }
 
-class Days(value: Int) : AbstractDurationComponent(value, 'd'), DateDuration {
+class Days(value: Int) : AbstractDurationComponent(value, 'd'), Duration {
     operator fun plus(hours: Hours) = WeeksDaysAndHours(days = this, hours = hours)
     operator fun plus(minutes: Minutes) = DateTimeDuration(days = this, minutes = minutes)
 }
@@ -56,7 +51,7 @@ class Minutes(value: Int) : AbstractDurationComponent(value, 'm'), TimeDuration
 class WeeksAndDays internal constructor(
     weeks: Weeks = 0.weeks,
     days: Days = 0.days,
-) : DateTimeDuration(weeks = weeks, days = days), DateDuration {
+) : DateTimeDuration(weeks = weeks, days = days), Duration {
     operator fun plus(hours: Hours) = WeeksDaysAndHours(weeks, days, hours)
     operator fun plus(minutes: Minutes) = DateTimeDuration(weeks, days, minutes = minutes)
 }

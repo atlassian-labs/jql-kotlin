@@ -1,7 +1,12 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.endOfWeek
+import com.atlassian.jira.jql.function.startOfMonth
+import com.atlassian.jira.jql.function.startOfWeek
+import com.atlassian.jira.jql.function.startOfYear
 import com.atlassian.jira.jql.time.d
+import com.atlassian.jira.jql.time.days
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
@@ -24,6 +29,13 @@ class CreatedTest {
     )
 
     @Test
+    fun `created greater than function`() = assertJql(
+        Created greaterThan startOfWeek(),
+        // language=JQL
+        expectedJql = """created > startOfWeek()"""
+    )
+
+    @Test
     fun `created greater than equals timestamp`() = assertJql(
         Created greaterThanOrEqualTo LocalDateTime.of(2020, 8, 24, 1, 37),
         // language=JQL
@@ -35,6 +47,13 @@ class CreatedTest {
         Created greaterThanOrEqualTo (2.d + 5.m).ago,
         // language=JQL
         expectedJql = """created >= "-2d 5m""""
+    )
+
+    @Test
+    fun `created greater than equals function`() = assertJql(
+        Created greaterThanOrEqualTo startOfMonth(),
+        // language=JQL
+        expectedJql = """created >= startOfMonth()"""
     )
 
     @Test
@@ -52,6 +71,13 @@ class CreatedTest {
     )
 
     @Test
+    fun `created less than function`() = assertJql(
+        Created lessThan startOfYear(),
+        // language=JQL
+        expectedJql = """created < startOfYear()"""
+    )
+
+    @Test
     fun `created less than equals timestamp`() = assertJql(
         Created lessThanOrEqualTo LocalDateTime.of(2020, 8, 24, 1, 39),
         // language=JQL
@@ -63,6 +89,13 @@ class CreatedTest {
         Created lessThanOrEqualTo (2.h + 10.m).ago,
         // language=JQL
         expectedJql = """created <= "-2h 10m""""
+    )
+
+    @Test
+    fun `created less than equals function`() = assertJql(
+        Created lessThanOrEqualTo endOfWeek(10.days.ago),
+        // language=JQL
+        expectedJql = """created <= endOfWeek("-10d")"""
     )
 
     @Test

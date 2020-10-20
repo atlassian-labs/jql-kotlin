@@ -37,9 +37,13 @@ abstract class Field(override val name: String) : FieldName {
     protected fun noneOf(function: Function) = clause(NOT_IN, function.toJql())
 
     protected fun greaterThan(valueProvider: () -> String) = clause(GREATER_THAN, valueProvider())
+    protected fun greaterThan(function: Function) = clause(GREATER_THAN, function.toJql())
     protected fun greaterThanOrEqualTo(valueProvider: () -> String) = clause(GREATER_THAN_EQUALS, valueProvider())
+    protected fun greaterThanOrEqualTo(function: Function) = clause(GREATER_THAN_EQUALS, function.toJql())
     protected fun lessThan(valueProvider: () -> String) = clause(LESS_THAN, valueProvider())
+    protected fun lessThan(function: Function) = clause(LESS_THAN, function.toJql())
     protected fun lessThanOrEqualTo(valueProvider: () -> String) = clause(LESS_THAN_EQUALS, valueProvider())
+    protected fun lessThanOrEqualTo(function: Function) = clause(LESS_THAN_EQUALS, function.toJql())
 
     protected fun iz(valueProvider: () -> IsIsNotValue) = clause(IS, valueProvider())
     protected fun izNot(valueProvider: () -> IsIsNotValue) = clause(IS_NOT, valueProvider())

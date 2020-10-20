@@ -5,8 +5,6 @@ import com.atlassian.jira.jql.Identifier
 import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.ApprovalsFunction
 import com.atlassian.jira.jql.function.ComponentFunction
-import com.atlassian.jira.jql.time.RelativeDateTime
-import java.time.LocalDateTime
 
 class Identifiers internal constructor(internal val identifiers: Collection<Identifier>)
 
@@ -209,8 +207,6 @@ object RequestChannelType : Field("request-channel-type") {
     val anonymousPortal = Value("\"anonymous portal\"")
     val api = Value("api")
 }
-
-object RequestLastActivityTime : AbstractDateField<LocalDateTime, RelativeDateTime>("request-last-activity-time")
 
 object Resolution : Field("resolution"), SortableField {
     infix fun equalTo(value: String): Clause = equalTo { value.escape() }
