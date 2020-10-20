@@ -5,6 +5,7 @@ import com.atlassian.jira.jql.Identifier
 import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.ApprovalsFunction
 import com.atlassian.jira.jql.function.ComponentFunction
+import com.atlassian.jira.jql.function.IssueFunction
 
 class Identifiers internal constructor(internal val identifiers: Collection<Identifier>)
 
@@ -67,8 +68,10 @@ object EpicLink : Field("\"epic link\""), SortableField {
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
     infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
+    infix fun anyOf(function: IssueFunction): Clause = super.anyOf(function)
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
     infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(function: IssueFunction): Clause = super.noneOf(function)
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }
@@ -91,8 +94,10 @@ object IssueKey : Field("issueKey"), SortableField {
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
     infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
+    infix fun anyOf(function: IssueFunction): Clause = super.anyOf(function)
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
     infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(function: IssueFunction): Clause = super.noneOf(function)
     infix fun greaterThan(value: String): Clause = greaterThan { value.escape() }
     infix fun greaterThan(value: Identifier): Clause = greaterThan { value.toString() }
     infix fun greaterThanOrEqualTo(value: String): Clause = greaterThanOrEqualTo { value.escape() }

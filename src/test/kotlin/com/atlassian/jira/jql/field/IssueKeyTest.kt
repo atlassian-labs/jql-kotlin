@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.linkedIssues
+import com.atlassian.jira.jql.function.watchedIssues
 import org.junit.jupiter.api.Test
 
 class IssueKeyTest {
@@ -47,6 +49,13 @@ class IssueKeyTest {
     )
 
     @Test
+    fun `issue key in function`() = assertJql(
+        IssueKey anyOf linkedIssues("ABC-12"),
+        // language=JQL
+        expectedJql = """issueKey in linkedIssues("ABC-12")"""
+    )
+
+    @Test
     fun `issue key not in strings`() = assertJql(
         IssueKey noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -58,6 +67,13 @@ class IssueKeyTest {
         IssueKey noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """issueKey not in (4,5,6)"""
+    )
+
+    @Test
+    fun `issue key not in function`() = assertJql(
+        IssueKey noneOf watchedIssues(),
+        // language=JQL
+        expectedJql = """issueKey not in watchedIssues()"""
     )
 
     @Test

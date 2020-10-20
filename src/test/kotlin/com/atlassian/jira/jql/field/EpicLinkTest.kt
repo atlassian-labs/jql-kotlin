@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.issueHistory
+import com.atlassian.jira.jql.function.votedIssues
 import org.junit.jupiter.api.Test
 
 class EpicLinkTest {
@@ -47,6 +49,13 @@ class EpicLinkTest {
     )
 
     @Test
+    fun `epic link in function`() = assertJql(
+        EpicLink anyOf issueHistory(),
+        // language=JQL
+        expectedJql = """"epic link" in issueHistory()"""
+    )
+
+    @Test
     fun `epic link not in strings`() = assertJql(
         EpicLink noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -58,6 +67,13 @@ class EpicLinkTest {
         EpicLink noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """"epic link" not in (4,5,6)"""
+    )
+
+    @Test
+    fun `epic link not in function`() = assertJql(
+        EpicLink noneOf votedIssues(),
+        // language=JQL
+        expectedJql = """"epic link" not in votedIssues()"""
     )
 
     @Test
