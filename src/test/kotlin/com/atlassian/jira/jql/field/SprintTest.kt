@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.closedSprints
+import com.atlassian.jira.jql.function.futureSprints
 import org.junit.jupiter.api.Test
 
 internal class SprintTest {
@@ -47,6 +49,13 @@ internal class SprintTest {
     )
 
     @Test
+    fun `sprint in function`() = assertJql(
+        Sprint anyOf closedSprints(),
+        // language=JQL
+        expectedJql = """sprint in closedSprints()"""
+    )
+
+    @Test
     fun `sprint not in strings`() = assertJql(
         Sprint noneOf listOf("abra", "cadabra"),
         // language=JQL
@@ -58,6 +67,13 @@ internal class SprintTest {
         Sprint noneOf ids(4, 5, 6),
         // language=JQL
         expectedJql = """sprint not in (4,5,6)"""
+    )
+
+    @Test
+    fun `sprint not in function`() = assertJql(
+        Sprint noneOf futureSprints(),
+        // language=JQL
+        expectedJql = """sprint not in futureSprints()"""
     )
 
     @Test
