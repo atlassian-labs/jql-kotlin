@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>com.atlassian.pom</groupId>
         <artifactId>private-pom</artifactId>
-        <version>6.0.2</version>
+        <version>6.0.7</version>
     </parent>
 
     <groupId>com.atlassian.jira</groupId>
     <artifactId>jql-kotlin</artifactId>
     <version>0.1-SNAPSHOT</version>
+
+    <scm>
+        <url>https://bitbucket.org/atlassianlabs/jql-kotlin</url>
+        <connection>scm:git:ssh://git@bitbucket.org/atlassianlabs/jql-kotlin</connection>
+        <developerConnection>scm:git:ssh://git@bitbucket.org/atlassianlabs/jql-kotlin</developerConnection>
+        <tag>jql-kotlin-0.1</tag>
+    </scm>
 
     <properties>
         <kotlin.version>1.4.10</kotlin.version>
@@ -41,13 +46,6 @@
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>org.jetbrains.kotlin</groupId>-->
-<!--            <artifactId>kotlin-test</artifactId>-->
-<!--            <version>${kotlin.version}</version>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -166,6 +164,10 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M1</version>
             </plugin>
         </plugins>
     </build>

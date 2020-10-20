@@ -1,4 +1,4 @@
-image: maven:3.6.3
+image: maven:3.6.3-jdk-8
 
 definitions:
   # Used for accessing packages.atlassian.com
@@ -11,7 +11,7 @@ definitions:
 
 pipelines:
   default:
-    - step:
+    - step: &test
         name: Build and test
         caches:
           - maven
@@ -19,3 +19,15 @@ pipelines:
           - *artifactory-prepare
           - *artifactory-enable
           - mvn verify
+  branches:
+    main:
+      - step: *test
+      - step:
+          name: Release version
+          trigger: manual
+          caches:
+            - maven
+          script:
+            - *artifactory-prepare
+            - *artifactory-enable
+            - mvn -B release:prepare release:perform -Darguments=-DskipTests -DscmCommentPrefix="[skip ci]"
