@@ -4,6 +4,7 @@ import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.Identifier
 import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.ApprovalsFunction
+import com.atlassian.jira.jql.function.ComponentFunction
 import com.atlassian.jira.jql.time.RelativeDateTime
 import java.time.LocalDateTime
 
@@ -46,8 +47,10 @@ object Component : Field("component"), SortableField {
     infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
     infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
+    infix fun anyOf(function: ComponentFunction): Clause = super.anyOf(function)
     infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
     infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(function: ComponentFunction): Clause = super.noneOf(function)
     infix fun iz(value: IsIsNotValue): Clause = iz { value }
     infix fun izNot(value: IsIsNotValue): Clause = izNot { value }
 }

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 
 class VersionFunctionTest {
     @Test
-    fun `latestReleasedVersion allows no arguments`() {
+    fun `latestReleasedVersion without arguments`() {
         assertJql(
             latestReleasedVersion(),
             expectedJql = "latestReleasedVersion()"
@@ -36,7 +36,7 @@ class VersionFunctionTest {
     )
 
     @Test
-    fun `earliestUnreleasedVersion allows no arguments`() {
+    fun `earliestUnreleasedVersion without arguments`() {
         assertJql(
             earliestUnreleasedVersion(),
             expectedJql = "earliestUnreleasedVersion()"
@@ -66,7 +66,7 @@ class VersionFunctionTest {
     )
 
     @Test
-    fun `releasedVersions allows no arguments`() {
+    fun `releasedVersions without arguments`() {
         assertJql(
             releasedVersions(),
             expectedJql = "releasedVersions()"
@@ -96,7 +96,7 @@ class VersionFunctionTest {
     )
 
     @Test
-    fun `unreleasedVersions allows no arguments`() {
+    fun `unreleasedVersions without arguments`() {
         assertJql(
             unreleasedVersions(),
             expectedJql = "unreleasedVersions()"
