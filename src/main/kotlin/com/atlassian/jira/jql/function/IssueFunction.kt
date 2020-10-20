@@ -23,6 +23,7 @@ fun watchedIssues(): IssueFunction = object : AbstractFunction("watchedIssues"),
 // - need to avoid signature ambiguity
 // - need to restrict calling with just `until` argument defined by name
 fun updatedBy(user: String): IssueFunction = object : AbstractFunction("updatedBy", listOf(user.escape())), IssueFunction {}
+
 fun updatedBy(user: String, from: LocalDateTime, until: LocalDateTime? = null): IssueFunction {
     until?.let { ensureFromEarlierThanUntil(from, it) }
     return object : AbstractFunction("updatedBy", listOfNotNull(user.escape(), from.format(), until?.format())), IssueFunction {}

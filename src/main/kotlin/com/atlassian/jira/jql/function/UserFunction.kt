@@ -13,4 +13,4 @@ fun membersOf(group: String): UserInclusionFunction =
 
 fun organizationMembers(vararg organizations: String): UserInclusionFunction = organizationMembers(organizations.toList())
 fun organizationMembers(organizations: Collection<String>): UserInclusionFunction =
-    object : AbstractFunction("membersOf", organizations.requireAtLeastOneArgument().map { it.escape() }), UserInclusionFunction {}
+    object : AbstractFunction("organizationMembers", organizations.requireAtLeastOneArgument().map { it.escape() }), UserInclusionFunction {}
