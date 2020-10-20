@@ -1,17 +1,15 @@
 package com.atlassian.jira.jql.function
 
 import com.atlassian.jira.jql.escape
-import com.atlassian.jira.jql.field.Identifiers
 
 interface ApprovalsFunction : Function
 
 fun approved(): ApprovalsFunction = object : AbstractFunction("approved"), ApprovalsFunction {}
 
-fun approver(vararg users: String): ApprovalsFunction =
-    object : AbstractFunction("approver", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}
+fun approver(vararg users: String): ApprovalsFunction = approver(users.toList())
 
-fun approver(userIds: Identifiers): ApprovalsFunction =
-    object : AbstractFunction("approver", userIds.identifiers.map { it.toString() }), ApprovalsFunction {}
+fun approver(users: Collection<String>): ApprovalsFunction =
+    object : AbstractFunction("approver", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}
 
 fun myApproval(): ApprovalsFunction = object : AbstractFunction("myApproval"), ApprovalsFunction {}
 
@@ -19,5 +17,7 @@ fun myPending(): ApprovalsFunction = object : AbstractFunction("myPending"), App
 
 fun pending(): ApprovalsFunction = object : AbstractFunction("pending"), ApprovalsFunction {}
 
-fun pendingBy(vararg users: String): ApprovalsFunction =
+fun pendingBy(vararg users: String): ApprovalsFunction = pendingBy(users.toList())
+
+fun pendingBy(users: Collection<String>): ApprovalsFunction =
     object : AbstractFunction("pendingBy", users.requireAtLeastOneArgument().map { it.escape() }), ApprovalsFunction {}

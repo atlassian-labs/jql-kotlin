@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.currentUser
+import com.atlassian.jira.jql.function.membersOf
 import org.junit.jupiter.api.Test
 
 class ReporterTest {
@@ -12,10 +14,24 @@ class ReporterTest {
     )
 
     @Test
+    fun `reporter equals to function`() = assertJql(
+        Reporter equalTo currentUser(),
+        // language=JQL
+        expectedJql = """reporter = currentUser()"""
+    )
+
+    @Test
     fun `reporter not equals to value`() = assertJql(
         Reporter notEqualTo "bob@mycompany.com",
         // language=JQL
         expectedJql = """reporter != "bob@mycompany.com""""
+    )
+
+    @Test
+    fun `reporter not equals to function`() = assertJql(
+        Reporter notEqualTo currentUser(),
+        // language=JQL
+        expectedJql = """reporter != currentUser()"""
     )
 
     @Test
@@ -26,10 +42,24 @@ class ReporterTest {
     )
 
     @Test
+    fun `reporter in function`() = assertJql(
+        Reporter anyOf membersOf("admins"),
+        // language=JQL
+        expectedJql = """reporter in membersOf("admins")"""
+    )
+
+    @Test
     fun `reporter not in values`() = assertJql(
         Reporter noneOf listOf("abra", "cadabra"),
         // language=JQL
         expectedJql = """reporter not in ("abra","cadabra")"""
+    )
+
+    @Test
+    fun `reporter not in function`() = assertJql(
+        Reporter noneOf membersOf("users"),
+        // language=JQL
+        expectedJql = """reporter not in membersOf("users")"""
     )
 
     @Test

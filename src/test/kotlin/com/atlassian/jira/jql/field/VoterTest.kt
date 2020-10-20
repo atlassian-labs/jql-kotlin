@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.currentUser
+import com.atlassian.jira.jql.function.membersOf
 import org.junit.jupiter.api.Test
 
 class VoterTest {
@@ -12,10 +14,24 @@ class VoterTest {
     )
 
     @Test
+    fun `voter equals to function`() = assertJql(
+        Voter equalTo currentUser(),
+        // language=JQL
+        expectedJql = """voter = currentUser()"""
+    )
+
+    @Test
     fun `voter not equals to value`() = assertJql(
         Voter notEqualTo "bob@mycompany.com",
         // language=JQL
         expectedJql = """voter != "bob@mycompany.com""""
+    )
+
+    @Test
+    fun `voter not equals to function`() = assertJql(
+        Voter notEqualTo currentUser(),
+        // language=JQL
+        expectedJql = """voter != currentUser()"""
     )
 
     @Test
@@ -26,10 +42,24 @@ class VoterTest {
     )
 
     @Test
+    fun `voter in function`() = assertJql(
+        Voter anyOf membersOf("admins"),
+        // language=JQL
+        expectedJql = """voter in membersOf("admins")"""
+    )
+
+    @Test
     fun `voter not in values`() = assertJql(
         Voter noneOf listOf("abra", "cadabra"),
         // language=JQL
         expectedJql = """voter not in ("abra","cadabra")"""
+    )
+
+    @Test
+    fun `voter not in function`() = assertJql(
+        Voter noneOf membersOf("users"),
+        // language=JQL
+        expectedJql = """voter not in membersOf("users")"""
     )
 
     @Test

@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.currentUser
+import com.atlassian.jira.jql.function.membersOf
 import org.junit.jupiter.api.Test
 
 class CreatorTest {
@@ -12,10 +14,24 @@ class CreatorTest {
     )
 
     @Test
+    fun `creator equals to function`() = assertJql(
+        Creator equalTo currentUser(),
+        // language=JQL
+        expectedJql = """creator = currentUser()"""
+    )
+
+    @Test
     fun `creator not equals to value`() = assertJql(
         Creator notEqualTo "bob@mycompany.com",
         // language=JQL
         expectedJql = """creator != "bob@mycompany.com""""
+    )
+
+    @Test
+    fun `creator not equals to function`() = assertJql(
+        Creator notEqualTo currentUser(),
+        // language=JQL
+        expectedJql = """creator != currentUser()"""
     )
 
     @Test
@@ -26,10 +42,24 @@ class CreatorTest {
     )
 
     @Test
+    fun `creator in function`() = assertJql(
+        Creator anyOf membersOf("admins"),
+        // language=JQL
+        expectedJql = """creator in membersOf("admins")"""
+    )
+
+    @Test
     fun `creator not in values`() = assertJql(
         Creator noneOf listOf("abra", "cadabra"),
         // language=JQL
         expectedJql = """creator not in ("abra","cadabra")"""
+    )
+
+    @Test
+    fun `creator not in function`() = assertJql(
+        Creator noneOf membersOf("users"),
+        // language=JQL
+        expectedJql = """creator not in membersOf("users")"""
     )
 
     @Test

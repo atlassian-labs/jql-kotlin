@@ -24,6 +24,12 @@ class VersionFunctionTest {
     )
 
     @Test
+    fun `latestReleasedVersion with string collection argument`() = assertJql(
+        latestReleasedVersion(listOf("foo", "bar")),
+        expectedJql = """latestReleasedVersion("foo","bar")"""
+    )
+
+    @Test
     fun `latestReleasedVersion with identifier arguments`() = assertJql(
         latestReleasedVersion(ids(1, 2, 3)),
         expectedJql = """latestReleasedVersion(1,2,3)"""
@@ -44,6 +50,12 @@ class VersionFunctionTest {
     @Test
     fun `earliestUnreleasedVersion with string arguments`() = assertJql(
         earliestUnreleasedVersion("foo", "bar"),
+        expectedJql = """earliestUnreleasedVersion("foo","bar")"""
+    )
+
+    @Test
+    fun `earliestUnreleasedVersion with string collection argument`() = assertJql(
+        earliestUnreleasedVersion(listOf("foo", "bar")),
         expectedJql = """earliestUnreleasedVersion("foo","bar")"""
     )
 
@@ -72,6 +84,12 @@ class VersionFunctionTest {
     )
 
     @Test
+    fun `releasedVersions with string collection argument`() = assertJql(
+        releasedVersions(listOf("foo", "bar")),
+        expectedJql = """releasedVersions("foo","bar")"""
+    )
+
+    @Test
     fun `releasedVersions with identifier arguments`() = assertJql(
         releasedVersions(ids(1, 2, 3)),
         expectedJql = """releasedVersions(1,2,3)"""
@@ -92,6 +110,12 @@ class VersionFunctionTest {
     @Test
     fun `unreleasedVersions with string arguments`() = assertJql(
         unreleasedVersions("foo", "bar"),
+        expectedJql = """unreleasedVersions("foo","bar")"""
+    )
+
+    @Test
+    fun `unreleasedVersions with string collection argument`() = assertJql(
+        unreleasedVersions(listOf("foo", "bar")),
         expectedJql = """unreleasedVersions("foo","bar")"""
     )
 

@@ -1,6 +1,8 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import com.atlassian.jira.jql.function.currentUser
+import com.atlassian.jira.jql.function.membersOf
 import org.junit.jupiter.api.Test
 
 class AssigneeTest {
@@ -12,10 +14,24 @@ class AssigneeTest {
     )
 
     @Test
+    fun `assignee equals to function`() = assertJql(
+        Assignee equalTo currentUser(),
+        // language=JQL
+        expectedJql = """assignee = currentUser()"""
+    )
+
+    @Test
     fun `assignee not equals to value`() = assertJql(
         Assignee notEqualTo "bob@mycompany.com",
         // language=JQL
         expectedJql = """assignee != "bob@mycompany.com""""
+    )
+
+    @Test
+    fun `assignee not equals to function`() = assertJql(
+        Assignee notEqualTo currentUser(),
+        // language=JQL
+        expectedJql = """assignee != currentUser()"""
     )
 
     @Test
@@ -26,10 +42,24 @@ class AssigneeTest {
     )
 
     @Test
+    fun `assignee in function`() = assertJql(
+        Assignee anyOf membersOf("admins"),
+        // language=JQL
+        expectedJql = """assignee in membersOf("admins")"""
+    )
+
+    @Test
     fun `assignee not in values`() = assertJql(
         Assignee noneOf listOf("abra", "cadabra"),
         // language=JQL
         expectedJql = """assignee not in ("abra","cadabra")"""
+    )
+
+    @Test
+    fun `assignee not in function`() = assertJql(
+        Assignee noneOf membersOf("users"),
+        // language=JQL
+        expectedJql = """assignee not in membersOf("users")"""
     )
 
     @Test
