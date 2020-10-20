@@ -5,7 +5,7 @@ import com.atlassian.jira.jql.escape
 interface ProjectFunction : Function
 
 fun projectsLeadByUser(user: String? = null): ProjectFunction =
-    object : AbstractFunction("projectsLeadByUser", listOfNotNull(user).map { it.escape() }), ProjectFunction {}
+    object : AbstractFunction("projectsLeadByUser", listOfNotNull(user?.escape())), ProjectFunction {}
 
 fun projectsWhereUserHasPermission(permission: String): ProjectFunction =
     object : AbstractFunction("projectsWhereUserHasPermission", listOf(permission.escape())), ProjectFunction {}

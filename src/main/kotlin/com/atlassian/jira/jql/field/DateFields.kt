@@ -1,22 +1,20 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.Clause
+import com.atlassian.jira.jql.TemporalFormatter.date
+import com.atlassian.jira.jql.TemporalFormatter.dateTime
 import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.DateFunction
 import com.atlassian.jira.jql.time.RelativeDateTime
 import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.time.temporal.Temporal
-
-private val dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-private val dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")
 
 // Intentionally omitted EQUALS, NOT EQUALS, IN, NOT IN as they don't make much sense here
 // given that they require minute precision timestamps equality.
 abstract class AbstractDateField<T : Temporal>(
     name: String,
-    private val formatTemporal: (T) -> String = dateTimeFormat::format,
+    private val formatTemporal: (T) -> String = dateTime::format,
 ) : Field(name), SortableField {
     infix fun greaterThan(value: T): Clause = greaterThan { renderTemporal(value) }
     infix fun greaterThan(value: RelativeDateTime): Clause = greaterThan { value.jql }
@@ -40,7 +38,7 @@ object Created : AbstractDateField<LocalDateTime>("created")
 
 // Unlike other date fields, EQUALS, NOT EQUALS, IN, NOT IN make sense for Due date.
 // Omitted IN and NOT IN for relative date time arguments to avoid dealing with conflicting overloads.
-object Due : AbstractDateField<LocalDate>("due", dateFormat::format) {
+object Due : AbstractDateField<LocalDate>("due", date::format) {
     infix fun equalTo(value: LocalDate): Clause = equalTo { renderTemporal(value) }
     infix fun equalTo(value: RelativeDateTime): Clause = equalTo { value.jql }
     infix fun equalTo(function: DateFunction): Clause = super.equalTo(function)
