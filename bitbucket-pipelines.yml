@@ -30,4 +30,9 @@ pipelines:
           script:
             - *artifactory-prepare
             - *artifactory-enable
-            - mvn -B release:prepare release:perform -Darguments=-DskipTests -DscmCommentPrefix="[skip ci]"
+            - BASE_VERSION=`mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version -q -DforceStdout`
+            - VERSION=${BASE_VERSION}.${BITBUCKET_BUILD_NUMBER}
+            - mvn versions:set -DnewVersion=${VERSION}
+            - mvn deploy -Darguments=-DskipTests
+            - git tag -a ${VERSION} -m "Kotlin JQL v"${VERSION}
+            - git push --follow-tags

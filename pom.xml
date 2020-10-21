@@ -10,14 +10,7 @@
 
     <groupId>com.atlassian.jira</groupId>
     <artifactId>jql-kotlin</artifactId>
-    <version>0.2-SNAPSHOT</version>
-
-    <scm>
-        <url>https://bitbucket.org/atlassianlabs/jql-kotlin</url>
-        <connection>scm:git:ssh://git@bitbucket.org/atlassianlabs/jql-kotlin</connection>
-        <developerConnection>scm:git:ssh://git@bitbucket.org/atlassianlabs/jql-kotlin</developerConnection>
-        <tag>jql-kotlin-0.1</tag>
-    </scm>
+    <version>0.2</version>
 
     <properties>
         <kotlin.version>1.4.10</kotlin.version>
@@ -164,10 +157,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0-M1</version>
             </plugin>
         </plugins>
     </build>
