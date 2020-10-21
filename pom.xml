@@ -10,7 +10,7 @@
 
     <groupId>com.atlassian.jira</groupId>
     <artifactId>jql-kotlin</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
 
     <scm>
         <url>https://bitbucket.org/atlassianlabs/jql-kotlin</url>
