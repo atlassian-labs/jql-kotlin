@@ -8,16 +8,16 @@ import com.atlassian.jira.jql.time.RelativeTime
 // Intentionally omitted EQUALS, NOT EQUALS with relative time argument as they don't make much sense here
 // given that they require minute precision values equality.
 abstract class AbstractSlaField(name: String) : Field(name), SortableField {
-    infix fun equalTo(function: SlaEqualityFunction) = super.equalTo(function)
-    infix fun notEqualTo(function: SlaEqualityFunction): Clause = super.notEqualTo(function)
-    infix fun greaterThan(value: RelativeTime): Clause = greaterThan { value.jql }
-    infix fun greaterThan(function: SlaComparativeFunction): Clause = super.greaterThan(function)
-    infix fun greaterThanOrEqualTo(value: RelativeTime): Clause = greaterThanOrEqualTo { value.jql }
-    infix fun greaterThanOrEqualTo(function: SlaComparativeFunction): Clause = super.greaterThanOrEqualTo(function)
-    infix fun lessThan(value: RelativeTime): Clause = lessThan { value.jql }
-    infix fun lessThan(function: SlaComparativeFunction): Clause = super.lessThan(function)
-    infix fun lessThanOrEqualTo(value: RelativeTime): Clause = lessThanOrEqualTo { value.jql }
-    infix fun lessThanOrEqualTo(function: SlaComparativeFunction): Clause = super.lessThanOrEqualTo(function)
+    infix fun equalTo(function: SlaEqualityFunction) = _equalTo(function)
+    infix fun notEqualTo(function: SlaEqualityFunction): Clause = _notEqualTo(function)
+    infix fun greaterThan(value: RelativeTime): Clause = _greaterThan { value.jql }
+    infix fun greaterThan(function: SlaComparativeFunction): Clause = _greaterThan(function)
+    infix fun greaterThanOrEqualTo(value: RelativeTime): Clause = _greaterThanOrEqualTo { value.jql }
+    infix fun greaterThanOrEqualTo(function: SlaComparativeFunction): Clause = _greaterThanOrEqualTo(function)
+    infix fun lessThan(value: RelativeTime): Clause = _lessThan { value.jql }
+    infix fun lessThan(function: SlaComparativeFunction): Clause = _lessThan(function)
+    infix fun lessThanOrEqualTo(value: RelativeTime): Clause = _lessThanOrEqualTo { value.jql }
+    infix fun lessThanOrEqualTo(function: SlaComparativeFunction): Clause = _lessThanOrEqualTo(function)
 }
 
 object Sla {

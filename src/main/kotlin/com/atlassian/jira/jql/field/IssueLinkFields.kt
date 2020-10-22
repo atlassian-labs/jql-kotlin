@@ -8,14 +8,14 @@ import java.util.Locale
 abstract class AbstractIssueLinkField(type: IssueLinkType.Value? = null) : Field(
     type?.let { "issue${it.issueLinkSuffix}" } ?: "issueLink"
 ) {
-    infix fun equalTo(value: String): Clause = equalTo { value.escape() }
-    infix fun equalTo(value: Identifier): Clause = equalTo { value.toString() }
-    infix fun notEqualTo(value: String): Clause = notEqualTo { value.escape() }
-    infix fun notEqualTo(value: Identifier): Clause = notEqualTo { value.toString() }
-    infix fun anyOf(values: Collection<String>): Clause = anyOf { values.map { it.escape() } }
-    infix fun anyOf(values: Identifiers): Clause = anyOf { values.identifiers.map { it.toString() } }
-    infix fun noneOf(values: Collection<String>): Clause = noneOf { values.map { it.escape() } }
-    infix fun noneOf(values: Identifiers): Clause = noneOf { values.identifiers.map { it.toString() } }
+    infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
+    infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
+    infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }
+    infix fun notEqualTo(value: Identifier): Clause = _notEqualTo { value.toString() }
+    infix fun anyOf(values: Collection<String>): Clause = _anyOf { values.map { it.escape() } }
+    infix fun anyOf(values: Identifiers): Clause = _anyOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(values: Collection<String>): Clause = _noneOf { values.map { it.escape() } }
+    infix fun noneOf(values: Identifiers): Clause = _noneOf { values.identifiers.map { it.toString() } }
 }
 
 object IssueLink : AbstractIssueLinkField() {
@@ -23,10 +23,10 @@ object IssueLink : AbstractIssueLinkField() {
 }
 
 object IssueLinkType : Field("issueLinkType") {
-    infix fun equalTo(value: Value): Clause = equalTo { value.jql }
-    infix fun notEqualTo(value: Value): Clause = notEqualTo { value.jql }
-    infix fun anyOf(values: Collection<Value>): Clause = anyOf { values.map { it.jql } }
-    infix fun noneOf(values: Collection<Value>): Clause = noneOf { values.map { it.jql } }
+    infix fun equalTo(value: Value): Clause = _equalTo { value.jql }
+    infix fun notEqualTo(value: Value): Clause = _notEqualTo { value.jql }
+    infix fun anyOf(values: Collection<Value>): Clause = _anyOf { values.map { it.jql } }
+    infix fun noneOf(values: Collection<Value>): Clause = _noneOf { values.map { it.jql } }
 
     class Value(val jql: String) {
         val issueLinkSuffix: String

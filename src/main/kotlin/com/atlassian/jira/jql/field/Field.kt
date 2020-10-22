@@ -26,30 +26,31 @@ interface SortableField : FieldName {
     val desc get() = FieldOrder.Descending(name)
 }
 
+@Suppress("FunctionName") // intentionally prefix internal functions with underscore
 abstract class Field(override val name: String) : FieldName {
-    protected fun equalTo(valueProvider: () -> String) = clause(EQUALS, valueProvider())
-    protected fun equalTo(function: Function) = clause(EQUALS, function.toJql())
-    protected fun notEqualTo(valueProvider: () -> String) = clause(NOT_EQUALS, valueProvider())
-    protected fun notEqualTo(function: Function) = clause(NOT_EQUALS, function.toJql())
-    protected fun anyOf(valuesProvider: () -> Collection<String>) = clause(IN, valuesProvider())
-    protected fun anyOf(function: Function) = clause(IN, function.toJql())
-    protected fun noneOf(valuesProvider: () -> Collection<String>) = clause(NOT_IN, valuesProvider())
-    protected fun noneOf(function: Function) = clause(NOT_IN, function.toJql())
+    protected fun _equalTo(valueProvider: () -> String) = clause(EQUALS, valueProvider())
+    protected fun _equalTo(function: Function) = clause(EQUALS, function.toJql())
+    protected fun _notEqualTo(valueProvider: () -> String) = clause(NOT_EQUALS, valueProvider())
+    protected fun _notEqualTo(function: Function) = clause(NOT_EQUALS, function.toJql())
+    protected fun _anyOf(valuesProvider: () -> Collection<String>) = clause(IN, valuesProvider())
+    protected fun _anyOf(function: Function) = clause(IN, function.toJql())
+    protected fun _noneOf(valuesProvider: () -> Collection<String>) = clause(NOT_IN, valuesProvider())
+    protected fun _noneOf(function: Function) = clause(NOT_IN, function.toJql())
 
-    protected fun greaterThan(valueProvider: () -> String) = clause(GREATER_THAN, valueProvider())
-    protected fun greaterThan(function: Function) = clause(GREATER_THAN, function.toJql())
-    protected fun greaterThanOrEqualTo(valueProvider: () -> String) = clause(GREATER_THAN_EQUALS, valueProvider())
-    protected fun greaterThanOrEqualTo(function: Function) = clause(GREATER_THAN_EQUALS, function.toJql())
-    protected fun lessThan(valueProvider: () -> String) = clause(LESS_THAN, valueProvider())
-    protected fun lessThan(function: Function) = clause(LESS_THAN, function.toJql())
-    protected fun lessThanOrEqualTo(valueProvider: () -> String) = clause(LESS_THAN_EQUALS, valueProvider())
-    protected fun lessThanOrEqualTo(function: Function) = clause(LESS_THAN_EQUALS, function.toJql())
+    protected fun _greaterThan(valueProvider: () -> String) = clause(GREATER_THAN, valueProvider())
+    protected fun _greaterThan(function: Function) = clause(GREATER_THAN, function.toJql())
+    protected fun _greaterThanOrEqualTo(valueProvider: () -> String) = clause(GREATER_THAN_EQUALS, valueProvider())
+    protected fun _greaterThanOrEqualTo(function: Function) = clause(GREATER_THAN_EQUALS, function.toJql())
+    protected fun _lessThan(valueProvider: () -> String) = clause(LESS_THAN, valueProvider())
+    protected fun _lessThan(function: Function) = clause(LESS_THAN, function.toJql())
+    protected fun _lessThanOrEqualTo(valueProvider: () -> String) = clause(LESS_THAN_EQUALS, valueProvider())
+    protected fun _lessThanOrEqualTo(function: Function) = clause(LESS_THAN_EQUALS, function.toJql())
 
-    protected fun iz(valueProvider: () -> IsIsNotValue) = clause(IS, valueProvider())
-    protected fun izNot(valueProvider: () -> IsIsNotValue) = clause(IS_NOT, valueProvider())
+    protected fun _iz(valueProvider: () -> IsIsNotValue) = clause(IS, valueProvider())
+    protected fun _izNot(valueProvider: () -> IsIsNotValue) = clause(IS_NOT, valueProvider())
 
-    protected fun contains(valueProvider: () -> String) = clause(CONTAINS, valueProvider())
-    protected fun doesNotContain(valueProvider: () -> String) = clause(DOES_NOT_CONTAIN, valueProvider())
+    protected fun _contains(valueProvider: () -> String) = clause(CONTAINS, valueProvider())
+    protected fun _doesNotContain(valueProvider: () -> String) = clause(DOES_NOT_CONTAIN, valueProvider())
 
     private fun clause(operator: Operator, operand: String): Clause =
         operand.takeIf { it.isNotBlank() }
