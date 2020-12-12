@@ -266,6 +266,19 @@ object Status : Field("status"), SortableField {
     infix fun izNot(value: IsIsNotValue): Clause = _izNot { value }
 }
 
+object StatusCategory : Field("statusCategory"), SortableField {
+    infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
+    infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
+    infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }
+    infix fun notEqualTo(value: Identifier): Clause = _notEqualTo { value.toString() }
+    infix fun anyOf(values: Collection<String>): Clause = _anyOf { values.map { it.escape() } }
+    infix fun anyOf(values: Identifiers): Clause = _anyOf { values.identifiers.map { it.toString() } }
+    infix fun noneOf(values: Collection<String>): Clause = _noneOf { values.map { it.escape() } }
+    infix fun noneOf(values: Identifiers): Clause = _noneOf { values.identifiers.map { it.toString() } }
+    infix fun iz(value: IsIsNotValue): Clause = _iz { value }
+    infix fun izNot(value: IsIsNotValue): Clause = _izNot { value }
+}
+
 object Type : Field("type"), SortableField {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
