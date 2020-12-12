@@ -7,9 +7,5 @@ class NotClause(clause: Clause) : Clause(
         ?: ""
 )
 
-@Suppress("ClassName")
-object not {
-    operator fun invoke(clause: Clause): Clause = NotClause(clause)
-
-    operator fun invoke(clause: () -> Clause): Clause = NotClause(clause.asClause())
-}
+fun not(clause: Clause): Clause = NotClause(clause)
+fun not(clause: () -> Clause): Clause = NotClause(clause.asClause())

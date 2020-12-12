@@ -1,5 +1,7 @@
 package com.atlassian.jira.jql
 
+import com.atlassian.jira.jql.orderBy as orderByExpr
+
 open class Clause(private val jql: String) : JqlEntity {
     infix fun and(clause: Clause): Clause =
         CompoundClause(this, Keyword.AND, clause)
@@ -21,9 +23,10 @@ open class Clause(private val jql: String) : JqlEntity {
             // the resulting JQL string should be empty as well
             .takeIf { it.isNotBlank() }
             ?.let { clause ->
-                fieldsWithOrder.joinToString(separator = ", ") { it.toJql() }
+                orderByExpr(fieldsWithOrder)
                     .takeIf { it.isNotBlank() }
-                    ?.let { orderBy -> "$clause ORDER BY $orderBy" }
+                    ?.let { orderBy -> "$clause $orderBy" }
+                    ?: clause
             }
             ?: ""
 

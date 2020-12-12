@@ -62,4 +62,10 @@ class ClauseTest {
         Clause("clause") orderBy FieldOrder.Descending("field"),
         expectedJql = "clause ORDER BY field DESC"
     )
+
+    @Test
+    fun `clause order by multiple fields`() = assertJql(
+        Clause("clause") orderBy listOf(FieldOrder.Descending("fieldDesc"), FieldOrder.Ascending("fieldAsc")),
+        expectedJql = "clause ORDER BY fieldDesc DESC, fieldAsc ASC"
+    )
 }
