@@ -22,8 +22,8 @@ interface FieldName {
 }
 
 interface SortableField : FieldName {
-    val asc get() = FieldOrder.Ascending(name)
-    val desc get() = FieldOrder.Descending(name)
+    val asc get() = FieldOrder.Ascending(this)
+    val desc get() = FieldOrder.Descending(this)
 }
 
 @Suppress("FunctionName") // intentionally prefix internal functions with underscore

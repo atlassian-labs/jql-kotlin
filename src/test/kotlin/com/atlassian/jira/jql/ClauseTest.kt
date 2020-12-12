@@ -53,19 +53,22 @@ class ClauseTest {
 
     @Test
     fun `clause order by field ascending`() = assertJql(
-        Clause("clause") orderBy FieldOrder.Ascending("field"),
+        Clause("clause") orderBy FieldOrder.Ascending(sortableField("field")),
         expectedJql = "clause ORDER BY field ASC"
     )
 
     @Test
     fun `clause order by field descending`() = assertJql(
-        Clause("clause") orderBy FieldOrder.Descending("field"),
+        Clause("clause") orderBy FieldOrder.Descending(sortableField("field")),
         expectedJql = "clause ORDER BY field DESC"
     )
 
     @Test
     fun `clause order by multiple fields`() = assertJql(
-        Clause("clause") orderBy listOf(FieldOrder.Descending("fieldDesc"), FieldOrder.Ascending("fieldAsc")),
+        Clause("clause") orderBy listOf(
+            FieldOrder.Descending(sortableField("fieldDesc")),
+            FieldOrder.Ascending(sortableField("fieldAsc"))
+        ),
         expectedJql = "clause ORDER BY fieldDesc DESC, fieldAsc ASC"
     )
 }
