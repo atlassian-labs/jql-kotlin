@@ -101,6 +101,16 @@ If a function, in turn, takes some arguments, they appear as regular arguments i
 Approvals equalTo pendingBy("jdoe", "vpupkin")
 ```
 
+### Grouping clauses
+
+Just like in the real JQL, you might need to express the grouping of multiple clauses. The catch is that parentheses
+can legitimately appear in Kotlin code (there's no way to prevent this), including the DSL, but they will have no effect
+on the query such code generates. Instead of regular parentheses, the DSL syntax for grouping clauses are curly braces:
+
+```kotlin
+Assignee equalTo "alice" and { Project equalTo "FOO" or (Labels equalTo "important") }  // assignee = "alice" AND (project = "FOO" OR labels = "important") ORDER BY project DESC
+```
+
 ### Order
 
 To specify which fields to use for results sorting, use one of the `orderBy` function overloads on a JQL clause.
