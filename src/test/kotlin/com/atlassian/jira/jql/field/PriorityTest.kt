@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class PriorityTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Priority, Field.forName("priority"))
+    }
+
     @Test
     fun `priority equals to string`() = assertJql(
         Priority equalTo "High",

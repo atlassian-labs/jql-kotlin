@@ -10,9 +10,16 @@ import com.atlassian.jira.jql.function.remaining
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.hours
 import com.atlassian.jira.jql.time.minutes
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class SlaTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(TimeToResolution, Field.forName("Time to resolution"))
+        assertEquals(TimeToFirstResponse, Field.forName("Time to first response"))
+    }
+
     @Test
     fun `SLA equals to function`() = assertJql(
         TimeToFirstResponse equalTo breached(),

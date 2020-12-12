@@ -3,9 +3,15 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.currentUser
 import com.atlassian.jira.jql.function.membersOf
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class VoterTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Voter, Field.forName("voter"))
+    }
+
     @Test
     fun `voter equals to value`() = assertJql(
         Voter equalTo "Jill Jones",

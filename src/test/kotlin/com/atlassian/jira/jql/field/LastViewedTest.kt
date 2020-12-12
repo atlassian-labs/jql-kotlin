@@ -10,10 +10,16 @@ import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
 import com.atlassian.jira.jql.time.weeks
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class LastViewedTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(LastViewed, Field.forName("lastViewed"))
+    }
+
     @Test
     fun `last viewed greater than timestamp`() = assertJql(
         LastViewed greaterThan LocalDateTime.of(2020, 8, 30, 23, 41),

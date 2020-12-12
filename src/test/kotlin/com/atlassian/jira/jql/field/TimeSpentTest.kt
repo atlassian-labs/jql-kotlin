@@ -4,9 +4,15 @@ import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.time.hours
 import com.atlassian.jira.jql.time.minutes
 import com.atlassian.jira.jql.time.weeks
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class TimeSpentTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(TimeSpent, Field.forName("timeSpent"))
+    }
+
     @Test
     fun `time spent equals to value`() = assertJql(
         TimeSpent equalTo 1.hours,

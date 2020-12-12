@@ -1,9 +1,22 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class FilterTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Filter, Field.forName("filter"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(Filter, Field.forName("request"))
+        assertEquals(Filter, Field.forName("savedFilter"))
+        assertEquals(Filter, Field.forName("searchRequest"))
+    }
+
     @Test
     fun `filter equals to string`() = assertJql(
         Filter equalTo "My Saved Filter",

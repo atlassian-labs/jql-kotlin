@@ -6,7 +6,7 @@ import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.VersionEqualityFunction
 import com.atlassian.jira.jql.function.VersionInclusionFunction
 
-abstract class AbstractVersionField(name: String) : Field(name), SortableField {
+abstract class AbstractVersionField(name: String, vararg alias: String) : Field(name, *alias), SortableField {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
     infix fun equalTo(function: VersionEqualityFunction): Clause = _equalTo(function)

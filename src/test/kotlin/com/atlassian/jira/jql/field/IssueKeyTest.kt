@@ -3,9 +3,22 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.linkedIssues
 import com.atlassian.jira.jql.function.watchedIssues
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class IssueKeyTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(IssueKey, Field.forName("issueKey"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(IssueKey, Field.forName("id"))
+        assertEquals(IssueKey, Field.forName("issue"))
+        assertEquals(IssueKey, Field.forName("key"))
+    }
+
     @Test
     fun `issue key equals to string`() = assertJql(
         IssueKey equalTo "ABC-123",

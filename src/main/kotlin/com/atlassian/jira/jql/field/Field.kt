@@ -16,18 +16,31 @@ import com.atlassian.jira.jql.Operator.LESS_THAN_EQUALS
 import com.atlassian.jira.jql.Operator.NOT_EQUALS
 import com.atlassian.jira.jql.Operator.NOT_IN
 import com.atlassian.jira.jql.function.Function
+import java.util.Locale
 
-interface FieldName {
+interface NamedField {
     val name: String
+    val aliases: Collection<String>
 }
 
-interface SortableField : FieldName {
+interface SortableField : NamedField {
     val asc get() = FieldOrder.Ascending(this)
     val desc get() = FieldOrder.Descending(this)
+
+    companion object {
+        // TODO test for sortable fields
+        fun forName(name: String): SortableField? =
+            when (val field = FieldMap.lookup(name)) {
+                is SortableField -> field
+                else -> null
+            }
+    }
 }
 
 @Suppress("FunctionName") // intentionally prefix internal functions with underscore
-abstract class Field(override val name: String) : FieldName {
+abstract class Field(override val name: String, override val aliases: Collection<String>) : NamedField {
+    constructor(name: String, vararg alias: String) : this(name, alias.asList())
+
     protected fun _equalTo(valueProvider: () -> String) = clause(EQUALS, valueProvider())
     protected fun _equalTo(function: Function) = clause(EQUALS, function.toJql())
     protected fun _notEqualTo(valueProvider: () -> String) = clause(NOT_EQUALS, valueProvider())
@@ -66,4 +79,71 @@ abstract class Field(override val name: String) : FieldName {
 
     private fun clause(operator: Operator, operand: IsIsNotValue): Clause =
         Clause("$name ${operator.jql} ${operand.jql}")
+
+    companion object {
+        fun forName(name: String): Field? = FieldMap.lookup(name)
+    }
+}
+
+private object FieldMap {
+    private val fieldsByName: Map<String, Field> by lazy {
+        listOf(
+            AffectedVersion,
+            Approvals,
+            Assignee,
+            Attachments,
+            Category,
+            ChangeControlType,
+            Comment,
+            Component,
+            Created,
+            Creator,
+            CustomerRequestType,
+            Description,
+            Due,
+            Environment,
+            EpicLink,
+            Filter,
+            FixVersion,
+            IssueKey,
+            IssueLink,
+            IssueLinkType,
+            Labels,
+            LastViewed,
+            Level,
+            Organization,
+            OriginalEstimate,
+            Parent,
+            Priority,
+            Project,
+            ProjectType,
+            RemainingEstimate,
+            Reporter,
+            RequestChannelType,
+            RequestLastActivityTime,
+            Resolution,
+            Resolved,
+            Sprint,
+            Status,
+            StatusCategory,
+            Summary,
+            Text,
+            TimeSpent,
+            Sla.TimeToFirstResponse,
+            Sla.TimeToResolution,
+            Type,
+            Updated,
+            Voter,
+            Votes,
+            Watcher,
+            Watchers,
+            WorkRatio,
+        )
+            .flatMap { field -> (field.aliases + field.name).map { alias -> alias.normalize() to field } }
+            .toMap()
+    }
+
+    fun lookup(name: String): Field? = fieldsByName[name.normalize()]
+
+    private fun String.normalize() = toLowerCase(Locale.ENGLISH).removeSurrounding("\"")
 }

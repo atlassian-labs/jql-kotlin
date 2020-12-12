@@ -11,9 +11,15 @@ import com.atlassian.jira.jql.field.IssueLinkType.isClonedBy
 import com.atlassian.jira.jql.field.IssueLinkType.isDuplicatedBy
 import com.atlassian.jira.jql.field.IssueLinkType.splitFrom
 import com.atlassian.jira.jql.field.IssueLinkType.splitTo
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class IssueLinkTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(IssueLink, Field.forName("issueLink"))
+    }
+
     @Test
     fun `issue link equals to value`() = assertJql(
         IssueLink equalTo "ABC-123",

@@ -3,9 +3,15 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.closedSprints
 import com.atlassian.jira.jql.function.futureSprints
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class SprintTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Sprint, Field.forName("sprint"))
+    }
+
     @Test
     fun `sprint equals to string`() = assertJql(
         Sprint equalTo "February 1",

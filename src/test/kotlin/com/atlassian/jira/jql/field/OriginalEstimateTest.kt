@@ -4,9 +4,20 @@ import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.time.hours
 import com.atlassian.jira.jql.time.minutes
 import com.atlassian.jira.jql.time.weeks
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class OriginalEstimateTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(OriginalEstimate, Field.forName("originalEstimate"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(OriginalEstimate, Field.forName("timeOriginalEstimate"))
+    }
+
     @Test
     fun `original estimate equals to value`() = assertJql(
         OriginalEstimate equalTo 1.hours,

@@ -1,9 +1,20 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class TypeTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Type, Field.forName("type"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(Type, Field.forName("issueType"))
+    }
+
     @Test
     fun `type equals to string`() = assertJql(
         Type equalTo "Bug",

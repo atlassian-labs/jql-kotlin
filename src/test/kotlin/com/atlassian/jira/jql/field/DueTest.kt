@@ -11,10 +11,21 @@ import com.atlassian.jira.jql.time.days
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
 class DueTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Due, Field.forName("due"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(Due, Field.forName("dueDate"))
+    }
+
     @Test
     fun `due equals to timestamp`() = assertJql(
         Due equalTo LocalDate.of(2020, 10, 20),

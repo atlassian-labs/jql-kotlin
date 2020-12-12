@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class WatchersTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Watchers, Field.forName("watchers"))
+    }
+
     @Test
     fun `watchers equals to value`() = assertJql(
         Watchers equalTo 10000,

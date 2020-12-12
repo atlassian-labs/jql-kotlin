@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class LevelTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Level, Field.forName("level"))
+    }
+
     @Test
     fun `level equals to string`() = assertJql(
         Level equalTo "Really High",

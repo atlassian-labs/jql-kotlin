@@ -3,7 +3,7 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.time.Duration
 
-abstract class AbstractDurationField(name: String) : Field(name), SortableField {
+abstract class AbstractDurationField(name: String, vararg alias: String) : Field(name, *alias), SortableField {
     infix fun equalTo(value: Duration): Clause = _equalTo { value.jql }
     infix fun notEqualTo(value: Duration): Clause = _notEqualTo { value.jql }
     infix fun anyOf(values: Collection<Duration>): Clause = _anyOf { values.map { it.jql } }
@@ -16,8 +16,8 @@ abstract class AbstractDurationField(name: String) : Field(name), SortableField 
     infix fun izNot(value: IsIsNotValue): Clause = _izNot { value }
 }
 
-object OriginalEstimate : AbstractDurationField("originalEstimate")
+object OriginalEstimate : AbstractDurationField("originalEstimate", "timeOriginalEstimate")
 
-object RemainingEstimate : AbstractDurationField("remainingEstimate")
+object RemainingEstimate : AbstractDurationField("remainingEstimate", "timeEstimate")
 
 object TimeSpent : AbstractDurationField("timeSpent")

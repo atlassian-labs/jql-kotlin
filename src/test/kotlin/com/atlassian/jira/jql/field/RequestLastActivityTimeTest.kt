@@ -10,10 +10,16 @@ import com.atlassian.jira.jql.time.days
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class RequestLastActivityTimeTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(RequestLastActivityTime, Field.forName("request-last-activity-time"))
+    }
+
     @Test
     fun `request last activity time greater than timestamp`() = assertJql(
         RequestLastActivityTime greaterThan LocalDateTime.of(2020, 9, 9, 13, 6),

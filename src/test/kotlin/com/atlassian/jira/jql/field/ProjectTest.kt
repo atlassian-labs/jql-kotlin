@@ -3,9 +3,15 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.projectsLeadByUser
 import com.atlassian.jira.jql.function.projectsWhereUserHasRole
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class ProjectTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Project, Field.forName("project"))
+    }
+
     @Test
     fun `project equals to string`() = assertJql(
         Project equalTo "ABC Project",

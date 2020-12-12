@@ -10,10 +10,21 @@ import com.atlassian.jira.jql.time.days
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class CreatedTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Created, Field.forName("created"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(Created, Field.forName("createdDate"))
+    }
+
     @Test
     fun `created greater than timestamp`() = assertJql(
         Created greaterThan LocalDateTime.of(2020, 8, 24, 1, 20),

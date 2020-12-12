@@ -3,7 +3,7 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.Identifier
 
-abstract class AbstractNumberField(name: String) : Field(name), SortableField {
+abstract class AbstractNumberField(name: String, vararg alias: String) : Field(name, *alias), SortableField {
     infix fun equalTo(value: Long): Clause = _equalTo { value.toString() }
     infix fun notEqualTo(value: Long): Clause = _notEqualTo { value.toString() }
     infix fun anyOf(values: Collection<Long>): Clause = _anyOf { values.map { it.toString() } }

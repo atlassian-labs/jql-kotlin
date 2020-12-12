@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class DescriptionTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Description, Field.forName("description"))
+    }
+
     @Test
     fun `description contains value`() = assertJql(
         Description contains "Please see screenshot",

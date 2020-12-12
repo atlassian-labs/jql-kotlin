@@ -3,7 +3,7 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.Clause
 import com.atlassian.jira.jql.escape
 
-abstract class AbstractTextField(name: String) : Field(name) {
+abstract class AbstractTextField(name: String, vararg alias: String) : Field(name, *alias) {
     infix fun contains(value: String) = _contains { value.escape() }
 }
 

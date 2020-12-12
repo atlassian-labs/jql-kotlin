@@ -3,9 +3,15 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.issueHistory
 import com.atlassian.jira.jql.function.votedIssues
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class EpicLinkTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(EpicLink, Field.forName("epic link"))
+    }
+
     @Test
     fun `epic link equals to string`() = assertJql(
         EpicLink equalTo "ANERDS-31",

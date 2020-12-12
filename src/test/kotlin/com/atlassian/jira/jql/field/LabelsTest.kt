@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class LabelsTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Labels, Field.forName("labels"))
+    }
+
     @Test
     fun `labels equals to value`() = assertJql(
         Labels equalTo "label1",

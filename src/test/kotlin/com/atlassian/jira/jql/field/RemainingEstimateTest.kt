@@ -4,9 +4,20 @@ import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.time.hours
 import com.atlassian.jira.jql.time.minutes
 import com.atlassian.jira.jql.time.weeks
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class RemainingEstimateTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(RemainingEstimate, Field.forName("remainingEstimate"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(RemainingEstimate, Field.forName("timeEstimate"))
+    }
+
     @Test
     fun `remaining estimate equals to value`() = assertJql(
         RemainingEstimate equalTo 1.hours,

@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class ParentTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Parent, Field.forName("parent"))
+    }
+
     @Test
     fun `parent equals to string`() = assertJql(
         Parent equalTo "TEST-1234",

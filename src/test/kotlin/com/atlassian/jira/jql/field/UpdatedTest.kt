@@ -9,10 +9,21 @@ import com.atlassian.jira.jql.time.d
 import com.atlassian.jira.jql.time.h
 import com.atlassian.jira.jql.time.m
 import com.atlassian.jira.jql.time.w
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
 
 class UpdatedTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Updated, Field.forName("updated"))
+    }
+
+    @Test
+    fun `resolve by alias`() {
+        assertEquals(Updated, Field.forName("updatedDate"))
+    }
+
     @Test
     fun `updated greater than timestamp`() = assertJql(
         Updated greaterThan LocalDateTime.of(2020, 9, 10, 18, 49),

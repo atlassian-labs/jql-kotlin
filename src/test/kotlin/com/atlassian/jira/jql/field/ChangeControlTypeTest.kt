@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class ChangeControlTypeTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(ChangeControlType, Field.forName("change-control-type"))
+    }
+
     @Test
     fun `change control type equals to value`() = assertJql(
         ChangeControlType equalTo "uncontrolled",

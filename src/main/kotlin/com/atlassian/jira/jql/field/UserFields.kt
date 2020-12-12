@@ -5,7 +5,7 @@ import com.atlassian.jira.jql.escape
 import com.atlassian.jira.jql.function.UserEqualityFunction
 import com.atlassian.jira.jql.function.UserInclusionFunction
 
-abstract class AbstractUserField(name: String) : Field(name) {
+abstract class AbstractUserField(name: String, vararg alias: String) : Field(name, *alias) {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(function: UserEqualityFunction): Clause = _equalTo(function)
     infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }

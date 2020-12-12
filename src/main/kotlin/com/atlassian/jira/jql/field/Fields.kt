@@ -78,7 +78,7 @@ object EpicLink : Field("\"epic link\""), SortableField {
     infix fun izNot(value: IsIsNotValue): Clause = _izNot { value }
 }
 
-object Filter : Field("filter") {
+object Filter : Field("filter", "request", "savedFilter", "searchRequest") {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
     infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }
@@ -89,7 +89,7 @@ object Filter : Field("filter") {
     infix fun noneOf(values: Identifiers): Clause = _noneOf { values.identifiers.map { it.toString() } }
 }
 
-object IssueKey : Field("issueKey"), SortableField {
+object IssueKey : Field("issueKey", "id", "issue", "key"), SortableField {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
     infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }
@@ -279,7 +279,7 @@ object StatusCategory : Field("statusCategory"), SortableField {
     infix fun izNot(value: IsIsNotValue): Clause = _izNot { value }
 }
 
-object Type : Field("type"), SortableField {
+object Type : Field("type", "issueType"), SortableField {
     infix fun equalTo(value: String): Clause = _equalTo { value.escape() }
     infix fun equalTo(value: Identifier): Clause = _equalTo { value.toString() }
     infix fun notEqualTo(value: String): Clause = _notEqualTo { value.escape() }

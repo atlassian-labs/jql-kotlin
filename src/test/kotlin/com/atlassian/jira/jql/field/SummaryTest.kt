@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class SummaryTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Summary, Field.forName("summary"))
+    }
+
     @Test
     fun `summary contains value`() = assertJql(
         Summary contains "Error saving file",

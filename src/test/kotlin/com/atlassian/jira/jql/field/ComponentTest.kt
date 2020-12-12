@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class ComponentTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Component, Field.forName("component"))
+    }
+
     @Test
     fun `component equals to string`() = assertJql(
         Component equalTo "Comp1",

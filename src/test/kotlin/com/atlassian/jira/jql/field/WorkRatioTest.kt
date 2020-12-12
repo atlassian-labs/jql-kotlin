@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class WorkRatioTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(WorkRatio, Field.forName("workRatio"))
+    }
+
     @Test
     fun `work ratio equals to value`() = assertJql(
         WorkRatio equalTo 55,

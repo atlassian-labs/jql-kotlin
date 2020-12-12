@@ -1,9 +1,15 @@
 package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class StatusTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(Status, Field.forName("status"))
+    }
+
     @Test
     fun `status equals to string`() = assertJql(
         Status equalTo "Open",

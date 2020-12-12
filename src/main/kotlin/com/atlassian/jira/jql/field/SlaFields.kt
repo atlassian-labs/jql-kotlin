@@ -7,7 +7,7 @@ import com.atlassian.jira.jql.time.RelativeTime
 
 // Intentionally omitted EQUALS, NOT EQUALS with relative time argument as they don't make much sense here
 // given that they require minute precision values equality.
-abstract class AbstractSlaField(name: String) : Field(name), SortableField {
+abstract class AbstractSlaField(name: String, vararg alias: String) : Field(name, *alias), SortableField {
     infix fun equalTo(function: SlaEqualityFunction) = _equalTo(function)
     infix fun notEqualTo(function: SlaEqualityFunction): Clause = _notEqualTo(function)
     infix fun greaterThan(value: RelativeTime): Clause = _greaterThan { value.jql }

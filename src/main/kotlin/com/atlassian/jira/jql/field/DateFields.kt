@@ -15,7 +15,8 @@ import java.time.temporal.Temporal
 abstract class AbstractDateField<T : Temporal>(
     name: String,
     private val formatTemporal: (T) -> String = dateTime::format,
-) : Field(name), SortableField {
+    vararg alias: String,
+) : Field(name, *alias), SortableField {
     infix fun greaterThan(value: T): Clause = _greaterThan { renderTemporal(value) }
     infix fun greaterThan(value: RelativeDateTime): Clause = _greaterThan { value.jql }
     infix fun greaterThan(function: DateFunction): Clause = _greaterThan(function)
@@ -34,11 +35,11 @@ abstract class AbstractDateField<T : Temporal>(
     protected fun renderTemporal(value: T) = formatTemporal(value).escape()
 }
 
-object Created : AbstractDateField<LocalDateTime>("created")
+object Created : AbstractDateField<LocalDateTime>("created", alias = arrayOf("createdDate"))
 
 // Unlike other date fields, EQUALS, NOT EQUALS, IN, NOT IN make sense for Due date.
 // Omitted IN and NOT IN for relative date time arguments to avoid dealing with conflicting overloads.
-object Due : AbstractDateField<LocalDate>("due", date::format) {
+object Due : AbstractDateField<LocalDate>("due", date::format, "dueDate") {
     infix fun equalTo(value: LocalDate): Clause = _equalTo { renderTemporal(value) }
     infix fun equalTo(value: RelativeDateTime): Clause = _equalTo { value.jql }
     infix fun equalTo(function: DateFunction): Clause = _equalTo(function)
@@ -53,6 +54,6 @@ object LastViewed : AbstractDateField<LocalDateTime>("lastViewed")
 
 object RequestLastActivityTime : AbstractDateField<LocalDateTime>("request-last-activity-time")
 
-object Resolved : AbstractDateField<LocalDateTime>("resolved")
+object Resolved : AbstractDateField<LocalDateTime>("resolved", alias = arrayOf("resolutionDate"))
 
-object Updated : AbstractDateField<LocalDateTime>("updated")
+object Updated : AbstractDateField<LocalDateTime>("updated", alias = arrayOf("updatedDate"))

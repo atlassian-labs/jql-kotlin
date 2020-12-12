@@ -5,9 +5,15 @@ import com.atlassian.jira.jql.function.earliestUnreleasedVersion
 import com.atlassian.jira.jql.function.latestReleasedVersion
 import com.atlassian.jira.jql.function.releasedVersions
 import com.atlassian.jira.jql.function.unreleasedVersions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 class AffectedVersionTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(AffectedVersion, Field.forName("affectedVersion"))
+    }
+
     @Test
     fun `affected version equals to string`() = assertJql(
         AffectedVersion equalTo "3.14",

@@ -8,4 +8,5 @@ fun assertJql(actualJql: String, expectedJql: String) = assertEquals(expectedJql
 
 fun sortableField(name: String) = object : SortableField {
     override val name = name
+    override val aliases = emptyList<String>()
 }

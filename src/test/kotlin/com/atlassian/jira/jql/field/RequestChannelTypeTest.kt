@@ -6,9 +6,15 @@ import com.atlassian.jira.jql.field.RequestChannelType.api
 import com.atlassian.jira.jql.field.RequestChannelType.email
 import com.atlassian.jira.jql.field.RequestChannelType.jira
 import com.atlassian.jira.jql.field.RequestChannelType.portal
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class RequestChannelTypeTest {
+    @Test
+    fun `resolve by name`() {
+        assertEquals(RequestChannelType, Field.forName("request-channel-type"))
+    }
+
     @Test
     fun `request channel type equals to value`() = assertJql(
         RequestChannelType equalTo jira,
