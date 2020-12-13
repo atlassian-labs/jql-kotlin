@@ -20,3 +20,9 @@ infix fun (() -> Clause).or(clause: Clause): Clause =
 
 infix fun (() -> Clause).or(clause: () -> Clause): Clause =
     CompoundClause(asClause(), Keyword.OR, clause.asClause())
+
+infix fun (() -> Clause).orderBy(fieldWithOrder: FieldOrder): String =
+    asClause().orderBy(fieldWithOrder)
+
+infix fun (() -> Clause).orderBy(fieldsWithOrder: List<FieldOrder>): String =
+    asClause().orderBy(fieldsWithOrder)

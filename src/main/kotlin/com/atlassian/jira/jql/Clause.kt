@@ -18,17 +18,11 @@ open class Clause(private val jql: String) : JqlEntity {
     infix fun orderBy(fieldWithOrder: FieldOrder): String = orderBy(listOf(fieldWithOrder))
 
     infix fun orderBy(fieldsWithOrder: List<FieldOrder>): String =
-        toJql()
-            // In case the clause to which the order is applied to is effectively empty,
-            // the resulting JQL string should be empty as well
-            .takeIf { it.isNotBlank() }
-            ?.let { clause ->
-                orderByExpr(fieldsWithOrder)
-                    .takeIf { it.isNotBlank() }
-                    ?.let { orderBy -> "$clause $orderBy" }
-                    ?: clause
-            }
-            ?: ""
+        // ORDER BY on its own is a valid JQL, so even if this clause is effectively empty,
+        // we can return ORDER BY as the result
+        arrayOf(toJql(), orderByExpr(fieldsWithOrder))
+            .filter { it.isNotBlank() }
+            .joinToString(separator = " ")
 
     override fun toJql() = jql
 
