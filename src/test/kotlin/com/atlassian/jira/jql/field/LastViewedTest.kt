@@ -18,6 +18,7 @@ class LastViewedTest {
     @Test
     fun `resolve by name`() {
         assertEquals(LastViewed, Field.forName("lastViewed"))
+        assertEquals(LastViewed, SortableField.forName("lastViewed"))
     }
 
     @Test

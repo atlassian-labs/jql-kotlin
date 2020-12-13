@@ -8,6 +8,7 @@ internal class ParentTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Parent, Field.forName("parent"))
+        assertEquals(Parent, SortableField.forName("parent"))
     }
 
     @Test

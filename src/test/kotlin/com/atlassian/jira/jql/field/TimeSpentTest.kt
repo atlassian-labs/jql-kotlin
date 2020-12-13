@@ -11,6 +11,7 @@ internal class TimeSpentTest {
     @Test
     fun `resolve by name`() {
         assertEquals(TimeSpent, Field.forName("timeSpent"))
+        assertEquals(TimeSpent, SortableField.forName("timeSpent"))
     }
 
     @Test

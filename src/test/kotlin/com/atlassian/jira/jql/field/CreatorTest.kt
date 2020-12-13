@@ -10,6 +10,7 @@ class CreatorTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Creator, Field.forName("creator"))
+        assertEquals(Creator, SortableField.forName("creator"))
     }
 
     @Test

@@ -8,6 +8,7 @@ class ResolutionTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Resolution, Field.forName("resolution"))
+        assertEquals(Resolution, SortableField.forName("resolution"))
     }
 
     @Test

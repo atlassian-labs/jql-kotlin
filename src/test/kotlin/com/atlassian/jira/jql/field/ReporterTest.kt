@@ -10,6 +10,7 @@ class ReporterTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Reporter, Field.forName("reporter"))
+        assertEquals(Reporter, SortableField.forName("reporter"))
     }
 
     @Test

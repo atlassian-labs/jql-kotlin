@@ -6,12 +6,14 @@ import com.atlassian.jira.jql.field.ProjectType.Value.JiraOps
 import com.atlassian.jira.jql.field.ProjectType.Value.JiraServiceDesk
 import com.atlassian.jira.jql.field.ProjectType.Value.JiraSoftware
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 internal class ProjectTypeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(ProjectType, Field.forName("projectType"))
+        assertNull(SortableField.forName("projectType"))
     }
 
     @Test

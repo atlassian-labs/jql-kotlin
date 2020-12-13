@@ -8,6 +8,7 @@ class DescriptionTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Description, Field.forName("description"))
+        assertEquals(Description, SortableField.forName("description"))
     }
 
     @Test

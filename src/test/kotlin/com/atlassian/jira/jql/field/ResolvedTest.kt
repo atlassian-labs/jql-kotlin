@@ -17,11 +17,13 @@ class ResolvedTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Resolved, Field.forName("resolved"))
+        assertEquals(Resolved, SortableField.forName("resolved"))
     }
 
     @Test
     fun `resolve by alias`() {
         assertEquals(Resolved, Field.forName("resolutionDate"))
+        assertEquals(Resolved, SortableField.forName("resolutionDate"))
     }
 
     @Test

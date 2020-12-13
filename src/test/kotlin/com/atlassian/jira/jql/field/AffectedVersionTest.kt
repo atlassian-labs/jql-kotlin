@@ -12,6 +12,7 @@ class AffectedVersionTest {
     @Test
     fun `resolve by name`() {
         assertEquals(AffectedVersion, Field.forName("affectedVersion"))
+        assertEquals(AffectedVersion, SortableField.forName("affectedVersion"))
     }
 
     @Test

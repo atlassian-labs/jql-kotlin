@@ -2,12 +2,14 @@ package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 internal class OrganizationTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Organization, Field.forName("organizations"))
+        assertNull(SortableField.forName("organizations"))
     }
 
     @Test

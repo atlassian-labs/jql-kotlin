@@ -8,6 +8,7 @@ internal class PriorityTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Priority, Field.forName("priority"))
+        assertEquals(Priority, SortableField.forName("priority"))
     }
 
     @Test

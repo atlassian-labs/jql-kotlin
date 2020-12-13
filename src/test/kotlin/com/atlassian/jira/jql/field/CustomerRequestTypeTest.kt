@@ -2,12 +2,14 @@ package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class CustomerRequestTypeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(CustomerRequestType, Field.forName("Customer Request Type"))
+        assertNull(SortableField.forName("Customer Request Type"))
     }
 
     @Test

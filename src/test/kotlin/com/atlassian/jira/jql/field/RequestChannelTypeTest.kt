@@ -7,12 +7,14 @@ import com.atlassian.jira.jql.field.RequestChannelType.email
 import com.atlassian.jira.jql.field.RequestChannelType.jira
 import com.atlassian.jira.jql.field.RequestChannelType.portal
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 internal class RequestChannelTypeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(RequestChannelType, Field.forName("request-channel-type"))
+        assertNull(SortableField.forName("request-channel-type"))
     }
 
     @Test

@@ -8,6 +8,7 @@ class SummaryTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Summary, Field.forName("summary"))
+        assertEquals(Summary, SortableField.forName("summary"))
     }
 
     @Test

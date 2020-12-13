@@ -8,6 +8,7 @@ internal class StatusCategoryTest {
     @Test
     fun `resolve by name`() {
         assertEquals(StatusCategory, Field.forName("statusCategory"))
+        assertEquals(StatusCategory, SortableField.forName("statusCategory"))
     }
 
     @Test

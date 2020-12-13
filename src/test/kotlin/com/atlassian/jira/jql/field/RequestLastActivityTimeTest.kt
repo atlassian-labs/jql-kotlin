@@ -18,6 +18,7 @@ class RequestLastActivityTimeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(RequestLastActivityTime, Field.forName("request-last-activity-time"))
+        assertEquals(RequestLastActivityTime, SortableField.forName("request-last-activity-time"))
     }
 
     @Test

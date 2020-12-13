@@ -8,6 +8,7 @@ internal class WorkRatioTest {
     @Test
     fun `resolve by name`() {
         assertEquals(WorkRatio, Field.forName("workRatio"))
+        assertEquals(WorkRatio, SortableField.forName("workRatio"))
     }
 
     @Test

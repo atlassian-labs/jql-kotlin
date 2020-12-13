@@ -10,6 +10,7 @@ class EpicLinkTest {
     @Test
     fun `resolve by name`() {
         assertEquals(EpicLink, Field.forName("epic link"))
+        assertEquals(EpicLink, SortableField.forName("epic link"))
     }
 
     @Test

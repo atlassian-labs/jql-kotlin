@@ -8,6 +8,7 @@ internal class StatusTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Status, Field.forName("status"))
+        assertEquals(Status, SortableField.forName("status"))
     }
 
     @Test

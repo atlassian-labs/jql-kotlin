@@ -2,12 +2,14 @@ package com.atlassian.jira.jql.field
 
 import com.atlassian.jira.jql.assertJql
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class FilterTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Filter, Field.forName("filter"))
+        assertNull(SortableField.forName("filter"))
     }
 
     @Test
@@ -15,6 +17,9 @@ class FilterTest {
         assertEquals(Filter, Field.forName("request"))
         assertEquals(Filter, Field.forName("savedFilter"))
         assertEquals(Filter, Field.forName("searchRequest"))
+        assertNull(SortableField.forName("request"))
+        assertNull(SortableField.forName("savedFilter"))
+        assertNull(SortableField.forName("searchRequest"))
     }
 
     @Test

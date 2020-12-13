@@ -8,11 +8,13 @@ internal class TypeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Type, Field.forName("type"))
+        assertEquals(Type, SortableField.forName("type"))
     }
 
     @Test
     fun `resolve by alias`() {
         assertEquals(Type, Field.forName("issueType"))
+        assertEquals(Type, SortableField.forName("issueType"))
     }
 
     @Test

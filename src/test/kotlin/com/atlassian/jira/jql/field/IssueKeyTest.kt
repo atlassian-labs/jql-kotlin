@@ -10,6 +10,7 @@ class IssueKeyTest {
     @Test
     fun `resolve by name`() {
         assertEquals(IssueKey, Field.forName("issueKey"))
+        assertEquals(IssueKey, SortableField.forName("issueKey"))
     }
 
     @Test
@@ -17,6 +18,9 @@ class IssueKeyTest {
         assertEquals(IssueKey, Field.forName("id"))
         assertEquals(IssueKey, Field.forName("issue"))
         assertEquals(IssueKey, Field.forName("key"))
+        assertEquals(IssueKey, SortableField.forName("id"))
+        assertEquals(IssueKey, SortableField.forName("issue"))
+        assertEquals(IssueKey, SortableField.forName("key"))
     }
 
     @Test

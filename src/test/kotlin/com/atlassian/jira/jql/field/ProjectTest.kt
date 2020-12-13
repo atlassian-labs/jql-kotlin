@@ -10,6 +10,7 @@ internal class ProjectTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Project, Field.forName("project"))
+        assertEquals(Project, SortableField.forName("project"))
     }
 
     @Test

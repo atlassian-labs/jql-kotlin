@@ -8,6 +8,7 @@ internal class VotesTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Votes, Field.forName("votes"))
+        assertEquals(Votes, SortableField.forName("votes"))
     }
 
     @Test

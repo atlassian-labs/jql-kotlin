@@ -11,11 +11,13 @@ internal class RemainingEstimateTest {
     @Test
     fun `resolve by name`() {
         assertEquals(RemainingEstimate, Field.forName("remainingEstimate"))
+        assertEquals(RemainingEstimate, SortableField.forName("remainingEstimate"))
     }
 
     @Test
     fun `resolve by alias`() {
         assertEquals(RemainingEstimate, Field.forName("timeEstimate"))
+        assertEquals(RemainingEstimate, SortableField.forName("timeEstimate"))
     }
 
     @Test

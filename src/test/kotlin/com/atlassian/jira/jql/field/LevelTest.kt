@@ -8,6 +8,7 @@ internal class LevelTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Level, Field.forName("level"))
+        assertEquals(Level, SortableField.forName("level"))
     }
 
     @Test

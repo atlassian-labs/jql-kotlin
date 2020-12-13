@@ -12,12 +12,14 @@ import com.atlassian.jira.jql.field.IssueLinkType.isDuplicatedBy
 import com.atlassian.jira.jql.field.IssueLinkType.splitFrom
 import com.atlassian.jira.jql.field.IssueLinkType.splitTo
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class IssueLinkTest {
     @Test
     fun `resolve by name`() {
         assertEquals(IssueLink, Field.forName("issueLink"))
+        assertNull(SortableField.forName("issueLink"))
     }
 
     @Test

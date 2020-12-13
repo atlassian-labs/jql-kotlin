@@ -4,12 +4,14 @@ import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.currentUser
 import com.atlassian.jira.jql.function.membersOf
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class WatcherTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Watcher, Field.forName("watcher"))
+        assertNull(SortableField.forName("watcher"))
     }
 
     @Test

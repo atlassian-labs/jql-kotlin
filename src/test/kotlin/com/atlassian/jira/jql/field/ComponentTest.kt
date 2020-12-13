@@ -8,6 +8,7 @@ internal class ComponentTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Component, Field.forName("component"))
+        assertEquals(Component, SortableField.forName("component"))
     }
 
     @Test

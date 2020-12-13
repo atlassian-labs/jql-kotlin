@@ -18,6 +18,8 @@ class SlaTest {
     fun `resolve by name`() {
         assertEquals(TimeToResolution, Field.forName("Time to resolution"))
         assertEquals(TimeToFirstResponse, Field.forName("Time to first response"))
+        assertEquals(TimeToResolution, SortableField.forName("Time to resolution"))
+        assertEquals(TimeToFirstResponse, SortableField.forName("Time to first response"))
     }
 
     @Test

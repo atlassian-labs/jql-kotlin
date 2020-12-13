@@ -12,6 +12,7 @@ internal class FixVersionTest {
     @Test
     fun `resolve by name`() {
         assertEquals(FixVersion, Field.forName("fixVersion"))
+        assertEquals(FixVersion, SortableField.forName("fixVersion"))
     }
 
     @Test

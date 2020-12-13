@@ -19,11 +19,13 @@ class DueTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Due, Field.forName("due"))
+        assertEquals(Due, SortableField.forName("due"))
     }
 
     @Test
     fun `resolve by alias`() {
         assertEquals(Due, Field.forName("dueDate"))
+        assertEquals(Due, SortableField.forName("dueDate"))
     }
 
     @Test

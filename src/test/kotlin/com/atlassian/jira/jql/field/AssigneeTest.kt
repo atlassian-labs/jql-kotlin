@@ -10,6 +10,7 @@ class AssigneeTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Assignee, Field.forName("assignee"))
+        assertEquals(Assignee, SortableField.forName("assignee"))
     }
 
     @Test

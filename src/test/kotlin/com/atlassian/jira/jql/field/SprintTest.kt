@@ -10,6 +10,7 @@ internal class SprintTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Sprint, Field.forName("sprint"))
+        assertEquals(Sprint, SortableField.forName("sprint"))
     }
 
     @Test

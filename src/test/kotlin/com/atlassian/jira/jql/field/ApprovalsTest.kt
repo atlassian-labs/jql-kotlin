@@ -3,12 +3,14 @@ package com.atlassian.jira.jql.field
 import com.atlassian.jira.jql.assertJql
 import com.atlassian.jira.jql.function.approver
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
 class ApprovalsTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Approvals, Field.forName("approvals"))
+        assertNull(SortableField.forName("approvals"))
     }
 
     @Test

@@ -8,6 +8,7 @@ class EnvironmentTest {
     @Test
     fun `resolve by name`() {
         assertEquals(Environment, Field.forName("environment"))
+        assertEquals(Environment, SortableField.forName("environment"))
     }
 
     @Test
