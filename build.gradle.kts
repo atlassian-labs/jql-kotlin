@@ -72,9 +72,10 @@ tasks {
     }
 
     signing {
-        val signingKey: String? by project
-        val signingPassword: String? by project
-        useInMemoryPgpKeys(signingKey, signingPassword)
+        useInMemoryPgpKeys(
+            System.getenv("SIGNING_KEY"),
+            System.getenv("SIGNING_PASSWORD"),
+        )
         sign(publishing.publications["release"])
     }
 }
