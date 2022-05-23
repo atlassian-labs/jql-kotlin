@@ -145,5 +145,5 @@ private object FieldMap {
 
     fun lookup(name: String): Field? = fieldsByName[name.normalize()]
 
-    private fun String.normalize() = toLowerCase(Locale.ENGLISH).removeSurrounding("\"")
+    private fun String.normalize() = lowercase(Locale.ENGLISH).removeSurrounding("\"")
 }

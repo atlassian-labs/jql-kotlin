@@ -5,5 +5,5 @@ import java.util.Locale
 enum class Keyword : JqlEntity {
     AND, OR;
 
-    override fun toJql(): String = name.toUpperCase(Locale.ENGLISH)
+    override fun toJql(): String = name.uppercase(Locale.ENGLISH)
 }

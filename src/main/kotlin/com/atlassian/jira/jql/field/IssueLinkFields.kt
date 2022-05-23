@@ -34,7 +34,9 @@ object IssueLinkType : Field("issueLinkType") {
                 .removePrefix("\"")
                 .removeSuffix("\"")
                 .split(' ')
-                .joinToString(separator = "") { it.capitalize(Locale.ENGLISH) }
+                .joinToString(separator = "") {
+                    it.replaceFirstChar { ch -> if (ch.isLowerCase()) ch.titlecase(Locale.ENGLISH) else it }
+                }
     }
 
     val isBlockedBy = Value("\"is blocked by\"")

@@ -1,1 +1,7 @@
-**/target/
+### Gradle
+.gradle
+.idea
+build/
+out/
+!gradle-wrapper.jar
+*.env.json

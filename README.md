@@ -1,5 +1,9 @@
-jql-kotlin
-==========
+# Kotlin JQL DSL
+
+[![Atlassian license](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat-square)](LICENSE)
+[![Maven Central status](https://img.shields.io/maven-central/v/com.atlassian.kotlin.dsl/jql.svg?style=flat-square)](https://search.maven.org/search?q=g:com.atlassian.kotlin.dsl%20a:jql)
+![CI](https://github.com/atlassian-labs/jql-kotlin/workflows/CI/badge.svg?branch=main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](CONTRIBUTING.md)
 
 Kotlin DSL for generating queries in [Jira Query Language (JQL)](https://support.atlassian.com/jira-software-cloud/docs/use-advanced-search-with-jira-query-language-jql/).
 
@@ -26,17 +30,17 @@ println(jqlQuery)  // project in ("JIRA","JQL") AND (labels = "jql" OR component
 
 ```xml
 <dependency>
-    <groupId>com.atlassian.jira</groupId>
-    <artifactId>jql-kotlin</artifactId>
-    <version>0.2</version>
+    <groupId>com.atlassian.kotlin.dsl</groupId>
+    <artifactId>jql</artifactId>
+    <version>0.1</version>
 </dependency>
 ```
 
 ### Gradle
 
-```groovy
+```kotlin
 dependencies {
-   implementation 'com.atlassian.jira:jql-kotlin:0.2'
+  implementation("com.atlassian.kotlin.dsl", "jql", "0.1")
 }
 ```
 
