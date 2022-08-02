@@ -1,7 +1,7 @@
 plugins {
-    kotlin("jvm") version "1.6.20"
-    id("org.jetbrains.dokka") version "1.6.21"
-    id("com.jfrog.artifactory") version "4.28.3"
+    kotlin("jvm") version "1.7.10"
+    id("org.jetbrains.dokka") version "1.7.10"
+    id("com.jfrog.artifactory") version "4.29.0"
     id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
     `maven-publish`
     signing
@@ -11,7 +11,7 @@ group = "com.atlassian.kotlin.dsl"
 version = "0.1"
 
 dependencies {
-    val junitVersion = "5.8.2"
+    val junitVersion = "5.9.0"
     testImplementation("org.junit.jupiter", "junit-jupiter-api", junitVersion)
     testImplementation("org.junit.jupiter", "junit-jupiter-params", junitVersion)
     testRuntimeOnly("org.junit.jupiter", "junit-jupiter-engine", junitVersion)
